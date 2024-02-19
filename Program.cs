@@ -27,10 +27,12 @@ string task1ResponseContent = task1Response.content;
 Task task1 = new Task(task1ResponseContent);
 Console.WriteLine($"Task 1:\n{Colors.Magenta}{task1.title}\n{task1.description}{ANSICodes.Reset}");
 Console.WriteLine($"Temperature in fahrenheit: {Colors.Red}{task1.parameters}{ANSICodes.Reset}");
+
 float fahrenheit = float.Parse(task1.parameters);
 float celsius = (fahrenheit - 32) * 5 / 9;
 celsius = (float) Math.Round(celsius, 2);
 string task1Answer = celsius.ToString();
+
 Console.WriteLine($"Temperature in celsius: {Colors.Green}{celsius}{ANSICodes.Reset}\n\n");
 Response task1SubmitResponse = await httpUtils.Post(baseURL + taskEndpoint + myPersonalID + "/" + task1.taskID, task1Answer);
 Console.WriteLine($"Answer: {Colors.Green}{task1SubmitResponse}{ANSICodes.Reset}");
@@ -41,3 +43,6 @@ Response task2Response = await httpUtils.Get(baseURL + taskEndpoint + myPersonal
 string task2ResponseContent = task2Response.content;
 Task task2 = new Task(task2ResponseContent);
 Console.WriteLine($"Task 2:\n{Colors.Magenta}{task2.title}\n{task2.description}{ANSICodes.Reset}");
+Console.WriteLine($"Sequence: {Colors.Red}{task2.parameters}{ANSICodes.Reset}");
+
+int[] sequence = task2.parameters.Split(',').Select(int.Parse).ToArray();
