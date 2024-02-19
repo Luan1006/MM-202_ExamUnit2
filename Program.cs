@@ -132,16 +132,16 @@ int task4Answer = series[series.Length - 1] - series[series.Length - 2] + series
 Console.WriteLine($"Next number: {Colors.Green}{task4Answer}{ANSICodes.Reset}\n");
 
 
-static void EvaluateTaskResponse(Response task1SubmitResponse)
+static void EvaluateTaskResponse(Response taskSubmitResponse)
 {
     // Check if answer was correct
-    if (task1SubmitResponse.content.Contains("taskID"))
+    if (taskSubmitResponse.content.Contains("taskID"))
     {
         Console.WriteLine($"{Colors.Green}Correct!{ANSICodes.Reset}");
     }
     else
     {
-        Task taskFailed = new Task(task1SubmitResponse.content);
+        Task taskFailed = new Task(taskSubmitResponse.content);
         Console.WriteLine($"{Colors.Red}Incorrect!{ANSICodes.Reset}");
         Console.Write($"Got: {Colors.Red}{taskFailed.got}{ANSICodes.Reset}");
         Console.Write($"Expected: {Colors.Green}{taskFailed.expected}{ANSICodes.Reset}");
