@@ -7,6 +7,9 @@ class Task
     public string? taskID { get; set; }
     public string? usierID { get; set; }
     public string? parameters { get; set; }
+    public string? Message { get; set; }
+    public string? got { get; set; }
+    public string? expected { get; set; }
 
     public Task(string jsonContent)
     {
@@ -36,6 +39,21 @@ class Task
         if (root.TryGetProperty("parameters", out JsonElement parametersElement))
         {
             parameters = parametersElement.GetString();
+        }
+
+        if (root.TryGetProperty("Message", out JsonElement messageElement))
+        {
+            Message = messageElement.GetString();
+        }
+
+        if (root.TryGetProperty("got", out JsonElement gotElement))
+        {
+            got = gotElement.GetString();
+        }
+
+        if (root.TryGetProperty("expected", out JsonElement expectedElement))
+        {
+            expected = expectedElement.GetString();
         }
     }
 }

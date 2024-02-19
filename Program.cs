@@ -33,9 +33,22 @@ float celsius = (fahrenheit - 32) * 5 / 9;
 celsius = (float)Math.Round(celsius, 2);
 string task1Answer = celsius.ToString();
 
-Console.WriteLine($"Temperature in celsius: {Colors.Green}{celsius}{ANSICodes.Reset}\n\n");
+Console.WriteLine($"Temperature in celsius: {Colors.Green}{celsius}{ANSICodes.Reset}\n");
 Response task1SubmitResponse = await httpUtils.Post(baseURL + taskEndpoint + myPersonalID + "/" + task1.taskID, task1Answer);
 Task startTask2 = new Task(task1SubmitResponse.content);
+
+// Check if answer was correct
+if (task1SubmitResponse.content.Contains("taskID"))
+{
+    Console.WriteLine($"{Colors.Green}Correct!{ANSICodes.Reset}\n\n");
+}
+else
+{
+    Task taskFailed = new Task(task1SubmitResponse.content);
+    Console.WriteLine($"{Colors.Red}Incorrect!{ANSICodes.Reset}\n\n");
+    Console.Write($"Got: {Colors.Red}{taskFailed.got}{ANSICodes.Reset}\n\n");
+    Console.Write($"Expected: {Colors.Green}{taskFailed.expected}{ANSICodes.Reset}\n");
+}
 
 //#### SECOND TASK
 Response task2Response = await httpUtils.Get(baseURL + taskEndpoint + myPersonalID + "/" + startTask2.taskID); // Get the task from the server
@@ -92,7 +105,6 @@ Dictionary<char, int> RomanNumber = new Dictionary<char, int>()
     {'L', 50},
     {'C', 100},
 };
-
 
 int RomanToInteger(string roman)
 {
