@@ -30,12 +30,11 @@ Console.WriteLine($"Temperature in fahrenheit: {Colors.Red}{task1.parameters}{AN
 
 float fahrenheit = float.Parse(task1.parameters);
 float celsius = (fahrenheit - 32) * 5 / 9;
-celsius = (float) Math.Round(celsius, 2);
+celsius = (float)Math.Round(celsius, 2);
 string task1Answer = celsius.ToString();
 
 Console.WriteLine($"Temperature in celsius: {Colors.Green}{celsius}{ANSICodes.Reset}\n\n");
 Response task1SubmitResponse = await httpUtils.Post(baseURL + taskEndpoint + myPersonalID + "/" + task1.taskID, task1Answer);
-Console.WriteLine($"Answer: {Colors.Green}{task1SubmitResponse}{ANSICodes.Reset}");
 Task startTask2 = new Task(task1SubmitResponse.content);
 
 //#### SECOND TASK
@@ -46,3 +45,33 @@ Console.WriteLine($"Task 2:\n{Colors.Magenta}{task2.title}\n{task2.description}{
 Console.WriteLine($"Sequence: {Colors.Red}{task2.parameters}{ANSICodes.Reset}");
 
 int[] sequence = task2.parameters.Split(',').Select(int.Parse).ToArray();
+string task2Answer = "";
+
+static bool IsPrime(int number)
+{
+    if (number <= 1) return false;
+    if (number == 2) return true;
+    if (number % 2 == 0) return false;
+
+    var boundary = (int)Math.Floor(Math.Sqrt(number));
+
+    for (int i = 3; i <= boundary; i += 2)
+        if (number % i == 0)
+            return false;
+
+    return true;
+}
+
+foreach (int number in sequence)
+{
+    if (IsPrime(number))
+    {
+        task2Answer += number + ",";
+    }
+}
+
+// Remove the trailing comma
+task2Answer = task2Answer.TrimEnd(',');
+
+Console.WriteLine($"Prime number(s): {Colors.Green}{task2Answer}{ANSICodes.Reset}\n\n");
+Response task2SubmitResponse = await httpUtils.Post(baseURL + taskEndpoint + myPersonalID + "/" + task2.taskID, task2Answer);
