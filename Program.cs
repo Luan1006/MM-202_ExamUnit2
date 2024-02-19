@@ -63,7 +63,7 @@ static bool IsPrime(int number)
     return true;
 }
 
-foreach (int number in sequence.OrderBy(n => n))
+foreach (int number in sequence)
 {
     if (IsPrime(number))
     {
