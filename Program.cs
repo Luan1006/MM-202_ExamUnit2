@@ -18,10 +18,9 @@ HttpUtils httpUtils = HttpUtils.instance;
 //#### REGISTRATION
 // We start by registering and getting the first task
 Response startRespons = await httpUtils.Get(baseURL + startEndpoint + myPersonalID);
-Console.WriteLine($"Start:\n{Colors.Magenta}{startRespons}{ANSICodes.Reset}\n\n"); // Print the response from the server to the console
-string content = startRespons.content; // Get the content from the response
-JsonDocument jsonDocument = JsonDocument.Parse(content); // Parse the content as JSON
-string taskID = jsonDocument.RootElement.GetProperty("taskID").GetString(); // Get the taskID from the JSON
+Console.WriteLine($"Start:\n{Colors.Magenta}{startRespons}{ANSICodes.Reset}\n\n");
+string content = startRespons.content;
+string taskID = Task.GetTaskIdFromJson(content);
 
 //#### FIRST TASK 
 // Fetch the details of the task from the server.
