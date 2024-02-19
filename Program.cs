@@ -131,6 +131,8 @@ int task4Answer = series[series.Length - 1] - series[series.Length - 2] + series
 
 Console.WriteLine($"Next number: {Colors.Green}{task4Answer}{ANSICodes.Reset}\n");
 
+Response task4SubmitResponse = await httpUtils.Post(baseURL + taskEndpoint + myPersonalID + "/" + task4.taskID, task4Answer.ToString());
+Console.WriteLine(task4SubmitResponse.content);
 
 static void EvaluateTaskResponse(Response taskSubmitResponse)
 {
