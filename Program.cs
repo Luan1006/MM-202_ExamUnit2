@@ -84,7 +84,7 @@ Task task3 = new Task(task3ResponseContent);
 Console.WriteLine($"Task 3:\n{Colors.Magenta}{task3.title}\n{task3.description}{ANSICodes.Reset}");
 Console.WriteLine($"Sequence: {Colors.Red}{task3.parameters}{ANSICodes.Reset}");
 
-Dictionary<char, int> RomanNumbers = new Dictionary<char, int>()
+Dictionary<char, int> RomanNumber = new Dictionary<char, int>()
 {
     {'I', 1},
     {'V', 5},
@@ -92,3 +92,23 @@ Dictionary<char, int> RomanNumbers = new Dictionary<char, int>()
     {'L', 50},
     {'C', 100},
 };
+
+
+int RomanToInteger(string roman)
+{
+    int number = 0;
+    for (int i = 0; i < roman.Length; i++)
+    {
+        if (i + 1 < roman.Length && RomanNumber[roman[i]] < RomanNumber[roman[i + 1]])
+        {
+            number -= RomanNumber[roman[i]];
+        }
+        else
+        {
+            number += RomanNumber[roman[i]];
+        }
+    }
+    return number;
+}
+
+Console.WriteLine($"Integer: {Colors.Green}{RomanToInteger(task3.parameters)}{ANSICodes.Reset}\n\n");
