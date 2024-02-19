@@ -16,15 +16,12 @@ const string taskEndpoint = "task/";   // baseURl + taskEndpoint + myPersonalID 
 HttpUtils httpUtils = HttpUtils.instance;
 
 //#### REGISTRATION
-// We start by registering and getting the first task
 Response startRespons = await httpUtils.Get(baseURL + startEndpoint + myPersonalID);
 Console.WriteLine($"Start:\n{Colors.Magenta}{startRespons}{ANSICodes.Reset}\n\n");
-string content = startRespons.content;
-
-// Create a new Task object from the JSON content
-Task task = new Task(content);
+string startResponsContent = startRespons.content;
+Task task = new Task(startResponsContent);
 
 //#### FIRST TASK 
-// Fetch the details of the task from the server.
 Response task1Response = await httpUtils.Get(baseURL + taskEndpoint + myPersonalID + "/" + task.taskID); // Get the task from the server
-Console.WriteLine(task1Response);
+string task1ResponseContent = task1Response.content;
+Task task1 = new Task(task1ResponseContent);
