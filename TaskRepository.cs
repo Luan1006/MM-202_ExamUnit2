@@ -5,10 +5,16 @@ using Colors = AnsiTools.ANSICodes.Colors;
 
 public class TaskRepository
 {
-    public static Response createStartResponse()
+    public static Response CreateStartResponse()
     {
         return HttpUtils.instance.Get(Constants.baseURL + Constants.startEndpoint + Constants.myPersonalID).Result;
     }
+
+    public static Response CreateTaskResponse(string taskID)
+    {
+        return HttpUtils.instance.Get(Constants.baseURL + Constants.taskEndpoint + Constants.myPersonalID + "/" + taskID).Result;
+    }
+
     public class Task1
     {
 

@@ -10,12 +10,12 @@ Console.WriteLine("Starting Assignment 2");
 HttpUtils httpUtils = HttpUtils.instance;
 
 //#### REGISTRATION
-Response startRespons = TaskRepository.createStartResponse();
+Response startRespons = TaskRepository.CreateStartResponse();
 string startResponsContent = startRespons.content;
 Task startTask1 = new Task(startResponsContent);
 
 //#### FIRST TASK 
-Response task1Response = await httpUtils.Get(baseURL + taskEndpoint + myPersonalID + "/" + startTask1.taskID); // Get the task from the server
+Response task1Response = TaskRepository.CreateTaskResponse(startTask1.taskID);
 string task1ResponseContent = task1Response.content;
 Task task1 = new Task(task1ResponseContent);
 Console.WriteLine($"Task 1:\n{Colors.Magenta}{task1.title}\n{task1.description}{ANSICodes.Reset}");
