@@ -37,18 +37,7 @@ Console.WriteLine($"Temperature in celsius: {Colors.Green}{celsius}{ANSICodes.Re
 Response task1SubmitResponse = await httpUtils.Post(baseURL + taskEndpoint + myPersonalID + "/" + task1.taskID, task1Answer);
 Task startTask2 = new Task(task1SubmitResponse.content);
 
-// Check if answer was correct
-if (task1SubmitResponse.content.Contains("taskID"))
-{
-    Console.WriteLine($"{Colors.Green}Correct!{ANSICodes.Reset}\n\n");
-}
-else
-{
-    Task taskFailed = new Task(task1SubmitResponse.content);
-    Console.WriteLine($"{Colors.Red}Incorrect!{ANSICodes.Reset}\n\n");
-    Console.Write($"Got: {Colors.Red}{taskFailed.got}{ANSICodes.Reset}\n\n");
-    Console.Write($"Expected: {Colors.Green}{taskFailed.expected}{ANSICodes.Reset}\n");
-}
+EvaluateTaskResponse(task1SubmitResponse);
 
 //#### SECOND TASK
 Response task2Response = await httpUtils.Get(baseURL + taskEndpoint + myPersonalID + "/" + startTask2.taskID); // Get the task from the server
@@ -88,6 +77,8 @@ task2Answer = task2Answer.TrimEnd(',');
 
 Console.WriteLine($"Prime number(s): {Colors.Green}{task2Answer}{ANSICodes.Reset}\n\n");
 Response task2SubmitResponse = await httpUtils.Post(baseURL + taskEndpoint + myPersonalID + "/" + task2.taskID, task2Answer);
+EvaluateTaskResponse(task2SubmitResponse);
+
 Task startTask3 = new Task(task2SubmitResponse.content);
 
 //#### THIRD TASK
@@ -124,3 +115,21 @@ int RomanToInteger(string roman)
 }
 
 Console.WriteLine($"Integer: {Colors.Green}{RomanToInteger(task3.parameters)}{ANSICodes.Reset}\n\n");
+
+static void EvaluateTaskResponse(Response task1SubmitResponse)
+{
+    // Check if answer was correct
+    if (task1SubmitResponse.content.Contains("taskID"))
+    {
+        Console.WriteLine($"{Colors.Green}Correct!{ANSICodes.Reset}");
+    }
+    else
+    {
+        Task taskFailed = new Task(task1SubmitResponse.content);
+        Console.WriteLine($"{Colors.Red}Incorrect!{ANSICodes.Reset}");
+        Console.Write($"Got: {Colors.Red}{taskFailed.got}{ANSICodes.Reset}");
+        Console.Write($"Expected: {Colors.Green}{taskFailed.expected}{ANSICodes.Reset}");
+    }
+
+    Console.WriteLine("-----------------------------\n\n");
+}
