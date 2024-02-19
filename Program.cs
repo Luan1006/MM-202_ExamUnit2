@@ -2,6 +2,7 @@
 using System.Text.Json;
 using AnsiTools;
 using Colors = AnsiTools.ANSICodes.Colors;
+using static TaskRepository;
 
 Console.Clear();
 Console.WriteLine("Starting Assignment 2");
@@ -10,12 +11,12 @@ Console.WriteLine("Starting Assignment 2");
 HttpUtils httpUtils = HttpUtils.instance;
 
 //#### REGISTRATION
-Response startRespons = TaskRepository.CreateStartResponse();
+Response startRespons = CreateStartResponse();
 string startResponsContent = startRespons.content;
 Task startTask1 = new Task(startResponsContent);
 
 //#### FIRST TASK 
-Response task1Response = TaskRepository.CreateTaskResponse(startTask1.taskID);
+Response task1Response = CreateTaskResponse(startTask1.taskID);
 string task1ResponseContent = task1Response.content;
 Task task1 = new Task(task1ResponseContent);
 Console.WriteLine($"Task 1:\n{Colors.Magenta}{task1.title}\n{task1.description}{ANSICodes.Reset}");
@@ -27,13 +28,13 @@ celsius = (float)Math.Round(celsius, 2);
 string task1Answer = celsius.ToString();
 
 Console.WriteLine($"Temperature in celsius: {Colors.Green}{celsius}{ANSICodes.Reset}\n");
-Response task1SubmitResponse = await httpUtils.Post(baseURL + taskEndpoint + myPersonalID + "/" + task1.taskID, task1Answer);
+Response task1SubmitResponse = CreateSubmitResponse(startTask1.taskID, task1Answer);
 Task startTask2 = new Task(task1SubmitResponse.content);
 
 EvaluateTaskResponse(task1SubmitResponse);
 
 //#### SECOND TASK
-Response task2Response = await httpUtils.Get(baseURL + taskEndpoint + myPersonalID + "/" + startTask2.taskID); // Get the task from the server
+Response task2Response = CreateTaskResponse(startTask2.taskID);
 string task2ResponseContent = task2Response.content;
 Task task2 = new Task(task2ResponseContent);
 Console.WriteLine($"Task 2:\n{Colors.Magenta}{task2.title}\n{task2.description}{ANSICodes.Reset}");

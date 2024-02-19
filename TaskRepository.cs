@@ -15,6 +15,10 @@ public class TaskRepository
         return HttpUtils.instance.Get(Constants.baseURL + Constants.taskEndpoint + Constants.myPersonalID + "/" + taskID).Result;
     }
 
+    public static Response CreateSubmitResponse(string taskID, string answer)
+    {
+        return HttpUtils.instance.Post(Constants.baseURL + Constants.taskEndpoint + Constants.myPersonalID + "/" + taskID, answer).Result;
+    }
     public class Task1
     {
 
