@@ -30,4 +30,8 @@ Console.WriteLine($"Temperature in fahrenheit: {Colors.Red}{task1.parameters}{AN
 float fahrenheit = float.Parse(task1.parameters);
 float celsius = (fahrenheit - 32) * 5 / 9;
 celsius = (float) Math.Round(celsius, 2);
+string task1Answer = celsius.ToString();
 Console.WriteLine($"Temperature in celsius: {Colors.Green}{celsius}{ANSICodes.Reset}\n\n");
+
+Response task1SubmitResponse = await httpUtils.Post(baseURL + taskEndpoint + myPersonalID + "/" + task1.taskID, task1Answer);
+Console.WriteLine($"Answer: {Colors.Green}{task1SubmitResponse}{ANSICodes.Reset}");
