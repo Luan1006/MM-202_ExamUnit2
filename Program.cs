@@ -25,3 +25,9 @@ Task task = new Task(startResponsContent);
 Response task1Response = await httpUtils.Get(baseURL + taskEndpoint + myPersonalID + "/" + task.taskID); // Get the task from the server
 string task1ResponseContent = task1Response.content;
 Task task1 = new Task(task1ResponseContent);
+Console.WriteLine($"Task 1:\n{Colors.Magenta}{task1.title}\n{task1.description}{ANSICodes.Reset}");
+Console.WriteLine($"Temperature in fahrenheit: {Colors.Red}{task1.parameters}{ANSICodes.Reset}");
+float fahrenheit = float.Parse(task1.parameters);
+float celsius = (fahrenheit - 32) * 5 / 9;
+celsius = (float) Math.Round(celsius, 2);
+Console.WriteLine($"Temperature in celsius: {Colors.Green}{celsius}{ANSICodes.Reset}\n\n");
