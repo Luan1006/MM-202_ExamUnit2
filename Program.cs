@@ -126,6 +126,11 @@ Task task4 = new Task(task4ResponseContent);
 Console.WriteLine($"Task 4:\n{Colors.Magenta}{task4.title}\n{task4.description}{ANSICodes.Reset}");
 Console.WriteLine($"Series: {Colors.Red}{task4.parameters}{ANSICodes.Reset}");
 
+int[] series = task4.parameters.Split(',').Select(int.Parse).ToArray();
+int task4Answer = series[series.Length - 1] - series[series.Length - 2] + series[series.Length - 1];
+
+Console.WriteLine($"Next number: {Colors.Green}{task4Answer}{ANSICodes.Reset}\n");
+
 
 static void EvaluateTaskResponse(Response task1SubmitResponse)
 {
