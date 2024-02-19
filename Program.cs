@@ -82,3 +82,13 @@ Response task3Response = await httpUtils.Get(baseURL + taskEndpoint + myPersonal
 string task3ResponseContent = task3Response.content;
 Task task3 = new Task(task3ResponseContent);
 Console.WriteLine($"Task 3:\n{Colors.Magenta}{task3.title}\n{task3.description}{ANSICodes.Reset}");
+Console.WriteLine($"Sequence: {Colors.Red}{task3.parameters}{ANSICodes.Reset}");
+
+Dictionary<char, int> RomanNumbers = new Dictionary<char, int>()
+{
+    {'I', 1},
+    {'V', 5},
+    {'X', 10},
+    {'L', 50},
+    {'C', 100},
+};
