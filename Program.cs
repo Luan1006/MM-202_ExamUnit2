@@ -75,3 +75,10 @@ task2Answer = task2Answer.TrimEnd(',');
 
 Console.WriteLine($"Prime number(s): {Colors.Green}{task2Answer}{ANSICodes.Reset}\n\n");
 Response task2SubmitResponse = await httpUtils.Post(baseURL + taskEndpoint + myPersonalID + "/" + task2.taskID, task2Answer);
+Task startTask3 = new Task(task2SubmitResponse.content);
+
+//#### THIRD TASK
+Response task3Response = await httpUtils.Get(baseURL + taskEndpoint + myPersonalID + "/" + startTask3.taskID); // Get the task from the server
+string task3ResponseContent = task3Response.content;
+Task task3 = new Task(task3ResponseContent);
+Console.WriteLine($"Task 3:\n{Colors.Magenta}{task3.title}\n{task3.description}{ANSICodes.Reset}");
