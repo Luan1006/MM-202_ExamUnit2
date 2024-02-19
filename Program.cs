@@ -20,9 +20,11 @@ HttpUtils httpUtils = HttpUtils.instance;
 Response startRespons = await httpUtils.Get(baseURL + startEndpoint + myPersonalID);
 Console.WriteLine($"Start:\n{Colors.Magenta}{startRespons}{ANSICodes.Reset}\n\n");
 string content = startRespons.content;
-string taskID = Task.GetTaskIdFromJson(content);
+
+// Create a new Task object from the JSON content
+Task task = new Task(content);
 
 //#### FIRST TASK 
 // Fetch the details of the task from the server.
-Response task1Response = await httpUtils.Get(baseURL + taskEndpoint + myPersonalID + "/" + taskID); // Get the task from the server
+Response task1Response = await httpUtils.Get(baseURL + taskEndpoint + myPersonalID + "/" + task.taskID); // Get the task from the server
 Console.WriteLine(task1Response);

@@ -7,34 +7,35 @@ class Task
     public string? taskID { get; set; }
     public string? usierID { get; set; }
     public string? parameters { get; set; }
-    
-    public static string GetTaskTitleFromJson(string content)
-    {
-        JsonDocument jsonDocument = JsonDocument.Parse(content);
-        return jsonDocument.RootElement.GetProperty("title").GetString();
-    }
 
-    public static string GetTaskDescriptionFromJson(string content)
+    public Task(string jsonContent)
     {
-        JsonDocument jsonDocument = JsonDocument.Parse(content);
-        return jsonDocument.RootElement.GetProperty("description").GetString();
-    }
+        JsonDocument jsonDocument = JsonDocument.Parse(jsonContent);
+        JsonElement root = jsonDocument.RootElement;
 
-    public static string GetTaskIdFromJson(string content)
-    {
-        JsonDocument jsonDocument = JsonDocument.Parse(content);
-        return jsonDocument.RootElement.GetProperty("taskID").GetString();
-    }
+        if (root.TryGetProperty("title", out JsonElement titleElement))
+        {
+            title = titleElement.GetString();
+        }
 
-    public static string GetUsierIdFromJson(string content)
-    {
-        JsonDocument jsonDocument = JsonDocument.Parse(content);
-        return jsonDocument.RootElement.GetProperty("usierID").GetString();
-    }
+        if (root.TryGetProperty("description", out JsonElement descriptionElement))
+        {
+            description = descriptionElement.GetString();
+        }
 
-    public static string GetParametersFromJson(string content)
-    {
-        JsonDocument jsonDocument = JsonDocument.Parse(content);
-        return jsonDocument.RootElement.GetProperty("parameters").GetString();
+        if (root.TryGetProperty("taskID", out JsonElement taskIdElement))
+        {
+            taskID = taskIdElement.GetString();
+        }
+
+        if (root.TryGetProperty("usierID", out JsonElement userIdElement))
+        {
+            usierID = userIdElement.GetString();
+        }
+
+        if (root.TryGetProperty("parameters", out JsonElement parametersElement))
+        {
+            parameters = parametersElement.GetString();
+        }
     }
 }
