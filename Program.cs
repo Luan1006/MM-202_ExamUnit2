@@ -17,7 +17,6 @@ HttpUtils httpUtils = HttpUtils.instance;
 
 //#### REGISTRATION
 Response startRespons = await httpUtils.Get(baseURL + startEndpoint + myPersonalID);
-Console.WriteLine($"Start:\n{Colors.Magenta}{startRespons}{ANSICodes.Reset}\n\n");
 string startResponsContent = startRespons.content;
 Task startTask1 = new Task(startResponsContent);
 
@@ -75,7 +74,7 @@ foreach (int number in sequence.OrderBy(n => n))
 // Remove the trailing comma
 task2Answer = task2Answer.TrimEnd(',');
 
-Console.WriteLine($"Prime number(s): {Colors.Green}{task2Answer}{ANSICodes.Reset}\n\n");
+Console.WriteLine($"Prime number(s): {Colors.Green}{task2Answer}{ANSICodes.Reset}\n");
 Response task2SubmitResponse = await httpUtils.Post(baseURL + taskEndpoint + myPersonalID + "/" + task2.taskID, task2Answer);
 EvaluateTaskResponse(task2SubmitResponse);
 
@@ -114,7 +113,19 @@ int RomanToInteger(string roman)
     return number;
 }
 
-Console.WriteLine($"Integer: {Colors.Green}{RomanToInteger(task3.parameters)}{ANSICodes.Reset}\n\n");
+Console.WriteLine($"Integer: {Colors.Green}{RomanToInteger(task3.parameters)}{ANSICodes.Reset}\n");
+string task3Answer = RomanToInteger(task3.parameters).ToString();
+Response task3SubmitResponse = await httpUtils.Post(baseURL + taskEndpoint + myPersonalID + "/" + task3.taskID, task3Answer);
+EvaluateTaskResponse(task3SubmitResponse);
+
+//#### FOURTH TASK
+Task startTask4 = new Task(task3SubmitResponse.content);
+Response task4Response = await httpUtils.Get(baseURL + taskEndpoint + myPersonalID + "/" + startTask4.taskID); // Get the task from the server
+string task4ResponseContent = task4Response.content;
+Task task4 = new Task(task4ResponseContent);
+Console.WriteLine($"Task 4:\n{Colors.Magenta}{task4.title}\n{task4.description}{ANSICodes.Reset}");
+Console.WriteLine($"Series: {Colors.Red}{task4.parameters}{ANSICodes.Reset}");
+
 
 static void EvaluateTaskResponse(Response task1SubmitResponse)
 {
@@ -131,5 +142,5 @@ static void EvaluateTaskResponse(Response task1SubmitResponse)
         Console.Write($"Expected: {Colors.Green}{taskFailed.expected}{ANSICodes.Reset}");
     }
 
-    Console.WriteLine("-----------------------------\n\n");
+    Console.WriteLine("\n-----------------------------\n\n");
 }
