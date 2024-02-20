@@ -33,7 +33,7 @@ public class TaskRepository
             Console.WriteLine($"{Colors.Red}Incorrect!{ANSICodes.Reset}");
             Console.Write($"Got: {Colors.Red}{taskFailed.got}{ANSICodes.Reset}");
             Console.Write($"Expected: {Colors.Green}{taskFailed.expected}{ANSICodes.Reset}");
-            
+
             throw new Exception("Task failed");
         }
 
@@ -45,7 +45,7 @@ public class TaskRepository
         public static string Main(Task task)
         {
             string celsius = FahrenheitToCelsius(task.parameters);
-            
+
             Console.WriteLine($"Task 1:\n{Colors.Magenta}{task.title}\n{task.description}{ANSICodes.Reset}");
             Console.WriteLine($"Temperature in fahrenheit: {Colors.Red}{task.parameters}{ANSICodes.Reset}");
             Console.WriteLine($"Temperature in celsius: {Colors.Green}{celsius}{ANSICodes.Reset}\n");
@@ -59,12 +59,13 @@ public class TaskRepository
 
         public static string FahrenheitToCelsius(string fahrenheit)
         {
+            System.Globalization.CultureInfo culture = System.Globalization.CultureInfo.InvariantCulture; // InvariantCulture is used to avoid issues with different cultures (e.g. comma vs. dot as decimal separator)
 
             float fahrenheitFloat = float.Parse(fahrenheit);
             float celsius = (fahrenheitFloat - 32) * 5 / 9;
             celsius = (float)Math.Round(celsius, 2);
 
-            return celsius.ToString();
+            return celsius.ToString(culture);
         }
     }
 }
