@@ -158,4 +158,20 @@ public class TaskRepository
             return number;
         }
     }
+
+    public class Series
+    {
+        public static string Main(Task task)
+        {
+            Console.WriteLine($"Task 4:\n{Colors.Magenta}{task.title}\n{task.description}{ANSICodes.Reset}");
+            Console.WriteLine($"Series: {Colors.Red}{task.parameters}{ANSICodes.Reset}");
+
+            int[] series = task.parameters.Split(',').Select(int.Parse).ToArray();
+            int answer = series[series.Length - 1] - series[series.Length - 2] + series[series.Length - 1];
+
+            Console.WriteLine($"Next number: {Colors.Green}{answer}{ANSICodes.Reset}\n");
+
+            return answer.ToString();
+        }
+    }
 }

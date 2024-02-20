@@ -1,9 +1,5 @@
 ﻿using HTTPUtils;
-using System.Text.Json;
-using AnsiTools;
-using Colors = AnsiTools.ANSICodes.Colors;
 using static TaskRepository;
-using static Constants;
 
 Console.Clear();
 Console.WriteLine("Starting Assignment 2");
@@ -41,17 +37,12 @@ string thirdTaskAnswer = Roman.Main(thirdTask);
 string getFourthTaskResponseContent = CreateSubmitResponse(initThirdTask.taskID, thirdTaskAnswer);
 
 //#### FOURTH TASK
-Task startTask4 = new Task(getFourthTaskResponseContent);
-Response task4Response = await httpUtils.Get(baseURL + taskEndpoint + myPersonalID + "/" + startTask4.taskID); // Get the task from the server
-string task4ResponseContent = task4Response.content;
-Task task4 = new Task(task4ResponseContent);
-Console.WriteLine($"Task 4:\n{Colors.Magenta}{task4.title}\n{task4.description}{ANSICodes.Reset}");
-Console.WriteLine($"Series: {Colors.Red}{task4.parameters}{ANSICodes.Reset}");
+Task initFourthTask = new Task(getFourthTaskResponseContent);
 
-int[] series = task4.parameters.Split(',').Select(int.Parse).ToArray();
-int task4Answer = series[series.Length - 1] - series[series.Length - 2] + series[series.Length - 1];
+Task fourthTask = GetTaskFromResponse(initFourthTask.taskID);
 
-Console.WriteLine($"Next number: {Colors.Green}{task4Answer}{ANSICodes.Reset}\n");
+string fourthTaskAnswer = Series.Main(fourthTask);
 
-Response task4SubmitResponse = await httpUtils.Post(baseURL + taskEndpoint + myPersonalID + "/" + task4.taskID, task4Answer.ToString());
-Console.WriteLine(task4SubmitResponse.content);
+string task4SubmitResponse = CreateSubmitResponse(initFourthTask.taskID, fourthTaskAnswer);
+
+Console.WriteLine(task4SubmitResponse);
