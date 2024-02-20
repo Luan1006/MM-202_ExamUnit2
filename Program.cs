@@ -18,12 +18,10 @@ Task initializeTask1 = new Task(startResponsContent);
 
 //#### FIRST TASK 
 Response task1Response = CreateTaskResponse(initializeTask1.taskID);
-string task1ID = task1Response.content;
-Task task1 = new Task(task1ID);
+string task1ResponseContent = task1Response.content;
+Task task1 = new Task(task1ResponseContent);
 
-string celsiusAnswer = Fahrenheit.Main(task1);
-
-string getStartTask2ID = EvaluateTaskResponse(GetTaskID(task1ID, celsiusAnswer));
+string getStartTask2ID = Fahrenheit.Main(task1);
 
 
 //#### SECOND TASK
