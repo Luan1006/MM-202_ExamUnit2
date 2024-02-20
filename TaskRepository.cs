@@ -15,12 +15,14 @@ public class TaskRepository
         return HttpUtils.instance.Get(Constants.baseURL + Constants.taskEndpoint + Constants.myPersonalID + "/" + taskID).Result;
     }
 
-    public static Response CreateSubmitResponse(string taskID, string answer)
+    public static string CreateSubmitResponse(string taskID, string answer)
     {
-        return HttpUtils.instance.Post(Constants.baseURL + Constants.taskEndpoint + Constants.myPersonalID + "/" + taskID, answer).Result;
+        Response response = HttpUtils.instance.Post(Constants.baseURL + Constants.taskEndpoint + Constants.myPersonalID + "/" + taskID, answer).Result;
+
+        return EvaluateTaskResponse(response);
     }
 
-    public static void EvaluateTaskResponse(Response taskSubmitResponse)
+    public static string EvaluateTaskResponse(Response taskSubmitResponse)
     {
         // Check if answer was correct
         if (taskSubmitResponse.content.Contains("taskID"))
@@ -38,6 +40,8 @@ public class TaskRepository
         }
 
         Console.WriteLine("\n-----------------------------\n\n");
+
+        return taskSubmitResponse.content;
     }
 
     public class Fahrenheit
