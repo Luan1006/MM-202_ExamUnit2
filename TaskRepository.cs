@@ -50,11 +50,7 @@ public class TaskRepository
             Console.WriteLine($"Temperature in fahrenheit: {Colors.Red}{task.parameters}{ANSICodes.Reset}");
             Console.WriteLine($"Temperature in celsius: {Colors.Green}{celsius}{ANSICodes.Reset}\n");
 
-            Response taskResponse = CreateSubmitResponse(task.taskID, celsius);
-
-            EvaluateTaskResponse(taskResponse);
-
-            return taskResponse.content;
+            return celsius;
         }
 
         public static string FahrenheitToCelsius(string fahrenheit)

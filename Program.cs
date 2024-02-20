@@ -21,11 +21,14 @@ Response task1Response = CreateTaskResponse(initializeTask1.taskID);
 string task1ResponseContent = task1Response.content;
 Task task1 = new Task(task1ResponseContent);
 
-string getStartTask2ID = Fahrenheit.Main(task1);
+string task1Answer = Fahrenheit.Main(task1);
 
+Response getStartTask2ResponsContent = CreateSubmitResponse(initializeTask1.taskID, task1Answer);
+
+EvaluateTaskResponse(getStartTask2ResponsContent);
 
 //#### SECOND TASK
-Task initializeTask2 = new Task(getStartTask2ID);
+Task initializeTask2 = new Task(getStartTask2ResponsContent.content);
 
 Response task2Response = CreateTaskResponse(initializeTask2.taskID);
 string task2ResponseContent = task2Response.content;
