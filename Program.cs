@@ -30,48 +30,18 @@ string secondTaskAnswer = PrimeNumbers.Main(secondTask);
 
 string getThirdTaskResponseContent = CreateSubmitResponse(initSecondTask.taskID, secondTaskAnswer);
 
-Task startTask3 = new Task(getThirdTaskResponseContent);
 
 //#### THIRD TASK
-Response task3Response = await httpUtils.Get(baseURL + taskEndpoint + myPersonalID + "/" + startTask3.taskID); // Get the task from the server
-string task3ResponseContent = task3Response.content;
-Task task3 = new Task(task3ResponseContent);
-Console.WriteLine($"Task 3:\n{Colors.Magenta}{task3.title}\n{task3.description}{ANSICodes.Reset}");
-Console.WriteLine($"Sequence: {Colors.Red}{task3.parameters}{ANSICodes.Reset}");
+Task initThirdTask = new Task(getThirdTaskResponseContent);
 
-Dictionary<char, int> RomanNumber = new Dictionary<char, int>()
-{
-    {'I', 1},
-    {'V', 5},
-    {'X', 10},
-    {'L', 50},
-    {'C', 100},
-};
+Task thirdTask = GetTaskFromResponse(initThirdTask.taskID);
 
-int RomanToInteger(string roman)
-{
-    int number = 0;
-    for (int i = 0; i < roman.Length; i++)
-    {
-        if (i + 1 < roman.Length && RomanNumber[roman[i]] < RomanNumber[roman[i + 1]])
-        {
-            number -= RomanNumber[roman[i]];
-        }
-        else
-        {
-            number += RomanNumber[roman[i]];
-        }
-    }
-    return number;
-}
+string thirdTaskAnswer = Roman.Main(thirdTask);
 
-Console.WriteLine($"Integer: {Colors.Green}{RomanToInteger(task3.parameters)}{ANSICodes.Reset}\n");
-string task3Answer = RomanToInteger(task3.parameters).ToString();
-Response task3SubmitResponse = await httpUtils.Post(baseURL + taskEndpoint + myPersonalID + "/" + task3.taskID, task3Answer);
-EvaluateTaskResponse(task3SubmitResponse);
+string getFourthTaskResponseContent = CreateSubmitResponse(initThirdTask.taskID, thirdTaskAnswer);
 
 //#### FOURTH TASK
-Task startTask4 = new Task(task3SubmitResponse.content);
+Task startTask4 = new Task(getFourthTaskResponseContent);
 Response task4Response = await httpUtils.Get(baseURL + taskEndpoint + myPersonalID + "/" + startTask4.taskID); // Get the task from the server
 string task4ResponseContent = task4Response.content;
 Task task4 = new Task(task4ResponseContent);

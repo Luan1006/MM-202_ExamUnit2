@@ -118,4 +118,44 @@ public class TaskRepository
             return true;
         }
     }
+
+    public class Roman
+    {
+        static Dictionary<char, int> RomanNumber = new Dictionary<char, int>()
+        {
+            {'I', 1},
+            {'V', 5},
+            {'X', 10},
+            {'L', 50},
+            {'C', 100},
+        };
+
+        public static string Main(Task task)
+        {
+            Console.WriteLine($"Task 3:\n{Colors.Magenta}{task.title}\n{task.description}{ANSICodes.Reset}");
+            Console.WriteLine($"Sequence: {Colors.Red}{task.parameters}{ANSICodes.Reset}");
+
+
+            Console.WriteLine($"Integer: {Colors.Green}{RomanToInteger(task.parameters)}{ANSICodes.Reset}\n");
+            string answer = RomanToInteger(task.parameters).ToString();
+            return answer;
+        }
+
+        static int RomanToInteger(string roman)
+        {
+            int number = 0;
+            for (int i = 0; i < roman.Length; i++)
+            {
+                if (i + 1 < roman.Length && RomanNumber[roman[i]] < RomanNumber[roman[i + 1]])
+                {
+                    number -= RomanNumber[roman[i]];
+                }
+                else
+                {
+                    number += RomanNumber[roman[i]];
+                }
+            }
+            return number;
+        }
+    }
 }
