@@ -13,13 +13,13 @@ public class Constants
         public const string Got = "Got: ";
         public const string Expected = "Expected: ";
         public const string TaskFailed = "Task failed";
-        public const string Divider = "-------------------";
+        public const string Divider = "---------------------------------";
+        public const string Parameter = "Parameter:";
+        public const string Answer = "Answer:";
 
         #region Fahrenheit
 
         public const string TaskOne = "Task 1:";
-        public const string TemperatureInFahrenheit = "Temperature in Fahrenheit:";
-        public const string TemperatureInCelsius = "Temperature in Celsius:";
         public const string TwoDecimal = "F2";
 
         #endregion
@@ -27,10 +27,8 @@ public class Constants
         #region PrimeNumbers
 
         public const string TaskTwo = "Task 2:";
-        public const string Sequence = "Sequence:";
         public const char CharComma = ',';
         public const string StringComma = ",";
-        public const string PrimeNumbers = "Prime number(s):";
 
         #endregion
 
@@ -43,16 +41,11 @@ public class Constants
         public const char CharRomanHundred = 'C';
 
         public const string TaskThree = "Task 3:";
-        public const string RomanNumber = "Roman number:";
-        public const string IntegerNumber = "Integer number:";
 
         #endregion
 
         #region Series
-
         public const string TaskFour = "Task 4:";
-        public const string Series = "Series:";
-        public const string NextNumber = "Next number:";
 
         #endregion
     }

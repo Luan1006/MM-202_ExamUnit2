@@ -38,7 +38,5 @@ namespace AnsiTools
             public const string Underline = "\u001b[4m";
             public const string Reversed = "\u001b[7m";
         }
-
-
     }
 }

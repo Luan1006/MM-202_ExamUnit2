@@ -2,6 +2,7 @@ using HTTPUtils;
 using AnsiTools;
 using Colors = AnsiTools.ANSICodes.Colors;
 using static Constants;
+using System.Runtime.CompilerServices;
 
 public class TaskRepository
 {
@@ -59,28 +60,59 @@ public class TaskRepository
             throw new Exception(Text.TaskFailed);
         }
 
-        Console.WriteLine($"\n{Text.Divider}\n\n");
+        Console.WriteLine($"\n{Text.Divider}\n");
 
         return taskSubmitResponse.content;
     }
 
+    private static void PrintCurrentTask(string currentTask)
+    {
+        Console.WriteLine($"\n{ANSICodes.Effects.Bold}{Colors.Magenta}{currentTask}{ANSICodes.Reset}");
+    }
+
+    private static void PrintTaskTitle(string title)
+    {
+        Console.WriteLine($"\n{Colors.Cyan}{title}{ANSICodes.Reset}");
+    }
+
+    private static void PrintTaskDescription(string description)
+    {
+        Console.WriteLine($"{Colors.White}{description}{ANSICodes.Reset}\n");
+    }
+
+    private static void PrintTaskParameter(string parameter)
+    {
+        Console.WriteLine($"{Colors.Red}{Text.Parameter} {parameter}{ANSICodes.Reset}");
+    }
+
+    private static void PrintTaskAnswer(string answer)
+    {
+        Console.WriteLine($"{Colors.Green}{Text.Answer} {answer}{ANSICodes.Reset}\n");
+    }
+
+    public static void PrintTaskDetails(String currentTask, Task task, String answer)
+    {
+        PrintCurrentTask(currentTask);
+        PrintTaskTitle(task.title);
+        PrintTaskDescription(task.description);
+        PrintTaskParameter(task.parameters);
+        PrintTaskAnswer(answer);
+    }
+
     public class Fahrenheit
     {
+        private static readonly System.Globalization.CultureInfo culture = System.Globalization.CultureInfo.InvariantCulture; // InvariantCulture is used to avoid issues with different cultures (e.g. comma vs. dot as decimal separator)
         public static string Main(Task task)
         {
             string celsius = FahrenheitToCelsius(task.parameters);
 
-            Console.WriteLine($"{Text.TaskOne}\n{Colors.Magenta}{task.title}\n{task.description}{ANSICodes.Reset}");
-            Console.WriteLine($"{Text.TemperatureInFahrenheit} {Colors.Red}{task.parameters}{ANSICodes.Reset}");
-            Console.WriteLine($"{Text.TemperatureInCelsius} {Colors.Green}{celsius}{ANSICodes.Reset}\n");
+            PrintTaskDetails(Text.TaskOne, task, celsius);
 
             return celsius;
         }
 
         public static string FahrenheitToCelsius(string fahrenheit)
         {
-            System.Globalization.CultureInfo culture = System.Globalization.CultureInfo.InvariantCulture; // InvariantCulture is used to avoid issues with different cultures (e.g. comma vs. dot as decimal separator)
-
             float fahrenheitFloat = float.Parse(fahrenheit);
             float celsius = (fahrenheitFloat - 32) * 5 / 9;
 
@@ -92,9 +124,6 @@ public class TaskRepository
     {
         public static string Main(Task task)
         {
-            Console.WriteLine($"{Text.TaskTwo}\n{Colors.Magenta}{task.title}\n{task.description}{ANSICodes.Reset}");
-            Console.WriteLine($"{Text.Sequence} {Colors.Red}{task.parameters}{ANSICodes.Reset}");
-
             int[] sequence = task.parameters.Split(Text.CharComma).Select(int.Parse).ToArray();
             string answer = "";
 
@@ -108,7 +137,8 @@ public class TaskRepository
 
             // Remove the trailing comma
             answer = answer.TrimEnd(Text.CharComma);
-            Console.WriteLine($"{Text.PrimeNumbers} {Colors.Green}{answer}{ANSICodes.Reset}\n");
+
+            PrintTaskDetails(Text.TaskTwo, task, answer);
 
             return answer;
         }
@@ -142,12 +172,10 @@ public class TaskRepository
 
         public static string Main(Task task)
         {
-            Console.WriteLine($"{Text.TaskThree}\n{Colors.Magenta}{task.title}\n{task.description}{ANSICodes.Reset}");
-            Console.WriteLine($"{Text.RomanNumber} {Colors.Red}{task.parameters}{ANSICodes.Reset}");
-
-
-            Console.WriteLine($"{Text.IntegerNumber} {Colors.Green}{RomanToInteger(task.parameters)}{ANSICodes.Reset}\n");
             string answer = RomanToInteger(task.parameters).ToString();
+
+            PrintTaskDetails(Text.TaskThree, task, answer);
+
             return answer;
         }
 
@@ -173,13 +201,10 @@ public class TaskRepository
     {
         public static string Main(Task task)
         {
-            Console.WriteLine($"{Text.TaskFour}\n{Colors.Magenta}{task.title}\n{task.description}{ANSICodes.Reset}");
-            Console.WriteLine($"{Text.Series} {Colors.Red}{task.parameters}{ANSICodes.Reset}");
-
             int[] series = task.parameters.Split(Text.CharComma).Select(int.Parse).ToArray();
             int answer = FindSeries(series);
 
-            Console.WriteLine($"{Text.NextNumber} {Colors.Green}{answer}{ANSICodes.Reset}\n");
+            PrintTaskDetails(Text.TaskFour, task, answer.ToString());
 
             return answer.ToString();
         }
