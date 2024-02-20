@@ -3,17 +3,17 @@
 Console.Clear();
 Console.WriteLine(Constants.Text.StartingAssignment);
 
-//#### REGISTRATION
+// Regsitration
 Task registrationTask = GetTaskFromResponse();
 
-//#### FIRST TASK 
+// First task
 string getSecondTaskResponseContent = ProcessTask(Fahrenheit.Main, registrationTask.taskID);
 
-//#### SECOND TASK
+// Second task
 string getThirdTaskResponseContent = ProcessTask(PrimeNumbers.Main, new Task(getSecondTaskResponseContent).taskID);
 
-//#### THIRD TASK
+// Third task
 string getFourthTaskResponseContent = ProcessTask(Roman.Main, new Task(getThirdTaskResponseContent).taskID);
 
-//#### FOURTH TASK
+// Fourth task
 string getFifthTaskResponseContent = ProcessTask(Series.Main, new Task(getFourthTaskResponseContent).taskID);

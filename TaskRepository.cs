@@ -107,8 +107,8 @@ public class TaskRepository
             }
 
             // Remove the trailing comma
-            answer = answer.TrimEnd(',');
-            Console.WriteLine($"Prime number(s): {Colors.Green}{answer}{ANSICodes.Reset}\n");
+            answer = answer.TrimEnd(Text.CharComma);
+            Console.WriteLine($"{Text.PrimeNumbers} {Colors.Green}{answer}{ANSICodes.Reset}\n");
 
             return answer;
         }
@@ -133,20 +133,20 @@ public class TaskRepository
     {
         static Dictionary<char, int> RomanNumber = new Dictionary<char, int>()
         {
-            {'I', 1},
-            {'V', 5},
-            {'X', 10},
-            {'L', 50},
-            {'C', 100},
+            {Text.CharRomanOne, 1},
+            {Text.CharRomanFive, 5},
+            {Text.CharRomanTen, 10},
+            {Text.CharRomanFifty, 50},
+            {Text.CharRomanHundred, 100},
         };
 
         public static string Main(Task task)
         {
-            Console.WriteLine($"Task 3:\n{Colors.Magenta}{task.title}\n{task.description}{ANSICodes.Reset}");
-            Console.WriteLine($"Sequence: {Colors.Red}{task.parameters}{ANSICodes.Reset}");
+            Console.WriteLine($"{Text.TaskThree}\n{Colors.Magenta}{task.title}\n{task.description}{ANSICodes.Reset}");
+            Console.WriteLine($"{Text.RomanNumber} {Colors.Red}{task.parameters}{ANSICodes.Reset}");
 
 
-            Console.WriteLine($"Integer: {Colors.Green}{RomanToInteger(task.parameters)}{ANSICodes.Reset}\n");
+            Console.WriteLine($"{Text.IntegerNumber} {Colors.Green}{RomanToInteger(task.parameters)}{ANSICodes.Reset}\n");
             string answer = RomanToInteger(task.parameters).ToString();
             return answer;
         }
@@ -173,13 +173,13 @@ public class TaskRepository
     {
         public static string Main(Task task)
         {
-            Console.WriteLine($"Task 4:\n{Colors.Magenta}{task.title}\n{task.description}{ANSICodes.Reset}");
-            Console.WriteLine($"Series: {Colors.Red}{task.parameters}{ANSICodes.Reset}");
+            Console.WriteLine($"{Text.TaskFour}\n{Colors.Magenta}{task.title}\n{task.description}{ANSICodes.Reset}");
+            Console.WriteLine($"{Text.Series} {Colors.Red}{task.parameters}{ANSICodes.Reset}");
 
-            int[] series = task.parameters.Split(',').Select(int.Parse).ToArray();
+            int[] series = task.parameters.Split(Text.CharComma).Select(int.Parse).ToArray();
             int answer = FindSeries(series);
 
-            Console.WriteLine($"Next number: {Colors.Green}{answer}{ANSICodes.Reset}\n");
+            Console.WriteLine($"{Text.NextNumber} {Colors.Green}{answer}{ANSICodes.Reset}\n");
 
             return answer.ToString();
         }

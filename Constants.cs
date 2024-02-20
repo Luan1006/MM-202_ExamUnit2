@@ -30,6 +30,29 @@ public class Constants
         public const string Sequence = "Sequence:";
         public const char CharComma = ',';
         public const string StringComma = ",";
+        public const string PrimeNumbers = "Prime number(s):";
+
+        #endregion
+
+        #region Roman
+
+        public const char CharRomanOne = 'I';
+        public const char CharRomanFive = 'V';
+        public const char CharRomanTen = 'X';
+        public const char CharRomanFifty = 'L';
+        public const char CharRomanHundred = 'C';
+
+        public const string TaskThree = "Task 3:";
+        public const string RomanNumber = "Roman number:";
+        public const string IntegerNumber = "Integer number:";
+
+        #endregion
+
+        #region Series
+
+        public const string TaskFour = "Task 4:";
+        public const string Series = "Series:";
+        public const string NextNumber = "Next number:";
 
         #endregion
     }
