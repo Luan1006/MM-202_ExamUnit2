@@ -43,16 +43,10 @@ public class TaskRepository
         Console.WriteLine($"{Colors.Green}{Text.Correct}{ANSICodes.Reset}");
     }
 
-    public static void PrintGreenMessage(string message)
+    public static void PrintColoredMessage(string message, string color)
     {
-        Console.WriteLine($"{Colors.Green}{message}{ANSICodes.Reset}");
+        Console.WriteLine($"{color}{message}{ANSICodes.Reset}");
     }
-
-    public static void PrintRedMessage(string message)
-    {
-        Console.WriteLine($"{Colors.Red}{message}{ANSICodes.Reset}");
-    }
-
     public static void PrintGotMessage(string got)
     {
         Console.WriteLine($"{Text.Got}{Colors.Red}{got}{ANSICodes.Reset}");
@@ -65,7 +59,7 @@ public class TaskRepository
 
     public static void PrintTaskFailed(Task task)
     {
-        PrintRedMessage(task.Message);
+        PrintColoredMessage(task.Message, Colors.Red);
         PrintGotMessage(task.got);
         PrintExpectedMessage(task.expected);
     }
@@ -85,7 +79,7 @@ public class TaskRepository
         }
         else if (task.got is null)
         {
-            PrintGreenMessage(task.Message);
+            PrintColoredMessage(task.Message, Colors.Green);
         }
         else
         {
