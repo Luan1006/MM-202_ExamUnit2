@@ -1,11 +1,7 @@
-﻿using HTTPUtils;
-using static TaskRepository;
+﻿using static TaskRepository;
 
 Console.Clear();
 Console.WriteLine("Starting Assignment 2");
-
-// Creating a variable for the HttpUtils so that we dont have to type HttpUtils.instance every time we want to use it
-HttpUtils httpUtils = HttpUtils.instance;
 
 //#### REGISTRATION
 Task registrationTask = GetTaskFromResponse();
