@@ -1,5 +1,4 @@
 using HTTPUtils;
-using System.Text.Json;
 using AnsiTools;
 using Colors = AnsiTools.ANSICodes.Colors;
 
@@ -33,17 +32,21 @@ public class TaskRepository
 
     public static string EvaluateTaskResponse(Response taskSubmitResponse)
     {
-        // Check if answer was correct
-        if (taskSubmitResponse.content.Contains("taskID"))
+        Task task = new Task(taskSubmitResponse.content);
+
+        if (task.taskID is not null)
         {
             Console.WriteLine($"{Colors.Green}Correct!{ANSICodes.Reset}");
         }
+        else if (task.got is null)
+        {
+            Console.WriteLine($"{Colors.Green}{task.Message}{ANSICodes.Reset}");
+        }
         else
         {
-            Task taskFailed = new Task(taskSubmitResponse.content);
-            Console.WriteLine($"{Colors.Red}Incorrect!{ANSICodes.Reset}");
-            Console.Write($"Got: {Colors.Red}{taskFailed.got}{ANSICodes.Reset}");
-            Console.Write($"Expected: {Colors.Green}{taskFailed.expected}{ANSICodes.Reset}");
+            Console.WriteLine($"{Colors.Red}{task.Message}{ANSICodes.Reset}");
+            Console.Write($"Got: {Colors.Red}{task.got}{ANSICodes.Reset}");
+            Console.Write($"Expected: {Colors.Green}{task.expected}{ANSICodes.Reset}");
 
             throw new Exception("Task failed");
         }
@@ -74,7 +77,7 @@ public class TaskRepository
             float celsius = (fahrenheitFloat - 32) * 5 / 9;
             celsius = (float)Math.Round(celsius, 2);
 
-            return celsius.ToString(culture);
+            return celsius.ToString("F2", culture);
         }
     }
 
