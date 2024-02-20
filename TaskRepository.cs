@@ -167,11 +167,16 @@ public class TaskRepository
             Console.WriteLine($"Series: {Colors.Red}{task.parameters}{ANSICodes.Reset}");
 
             int[] series = task.parameters.Split(',').Select(int.Parse).ToArray();
-            int answer = series[series.Length - 1] - series[series.Length - 2] + series[series.Length - 1];
+            int answer = FindSeries(series);
 
             Console.WriteLine($"Next number: {Colors.Green}{answer}{ANSICodes.Reset}\n");
 
             return answer.ToString();
+        }
+
+        static int FindSeries(int[] series)
+        {
+            return series[series.Length - 1] - series[series.Length - 2] + series[series.Length - 1];
         }
     }
 }
