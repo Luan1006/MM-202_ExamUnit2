@@ -1,7 +1,7 @@
 ﻿using static TaskRepository;
 
 Console.Clear();
-Console.WriteLine("Starting Assignment 2");
+Console.WriteLine(Constants.TextStrings.StartingAssignment);
 
 //#### REGISTRATION
 Task registrationTask = GetTaskFromResponse();
