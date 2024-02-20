@@ -1,4 +1,5 @@
 using System.Text.Json;
+using static Constants;
 
 public class Task
 {
@@ -16,42 +17,42 @@ public class Task
         JsonDocument jsonDocument = JsonDocument.Parse(jsonContent);
         JsonElement root = jsonDocument.RootElement;
 
-        if (root.TryGetProperty("title", out JsonElement titleElement))
+        if (root.TryGetProperty(TaskProperty.title, out JsonElement titleElement))
         {
             title = titleElement.GetString();
         }
 
-        if (root.TryGetProperty("description", out JsonElement descriptionElement))
+        if (root.TryGetProperty(TaskProperty.description, out JsonElement descriptionElement))
         {
             description = descriptionElement.GetString();
         }
 
-        if (root.TryGetProperty("taskID", out JsonElement taskIdElement))
+        if (root.TryGetProperty(TaskProperty.taskID, out JsonElement taskIdElement))
         {
             taskID = taskIdElement.GetString();
         }
 
-        if (root.TryGetProperty("usierID", out JsonElement userIdElement))
+        if (root.TryGetProperty(TaskProperty.usierID, out JsonElement userIdElement))
         {
             usierID = userIdElement.GetString();
         }
 
-        if (root.TryGetProperty("parameters", out JsonElement parametersElement))
+        if (root.TryGetProperty(TaskProperty.parameters, out JsonElement parametersElement))
         {
             parameters = parametersElement.GetString();
         }
 
-        if (root.TryGetProperty("Message", out JsonElement messageElement))
+        if (root.TryGetProperty(TaskProperty.Message, out JsonElement messageElement))
         {
             Message = messageElement.GetString();
         }
 
-        if (root.TryGetProperty("got", out JsonElement gotElement))
+        if (root.TryGetProperty(TaskProperty.got, out JsonElement gotElement))
         {
             got = gotElement.GetString();
         }
 
-        if (root.TryGetProperty("expected", out JsonElement expectedElement))
+        if (root.TryGetProperty(TaskProperty.expected, out JsonElement expectedElement))
         {
             expected = expectedElement.GetString();
         }

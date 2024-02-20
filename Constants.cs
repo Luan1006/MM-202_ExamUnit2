@@ -6,6 +6,18 @@ public class Constants
     public const string taskEndpoint = "task/";
     public const string SLASH = "/";
 
+    public class TaskProperty
+    {
+        public const string title = "title";
+        public const string description = "description";
+        public const string taskID = "taskID";
+        public const string usierID = "usierID";
+        public const string parameters = "parameters";
+        public const string Message = "Message";
+        public const string got = "got";
+        public const string expected = "expected";
+    }
+
     public class Text
     {
         public const string StartingAssignment = "Starting Assignment 2";
