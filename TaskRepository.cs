@@ -44,7 +44,7 @@ public class TaskRepository
 
         if (task.taskID is not null)
         {
-            Console.WriteLine($"{Colors.Green}Correct!{ANSICodes.Reset}");
+            Console.WriteLine($"{Colors.Green}{Text.Correct}{ANSICodes.Reset}");
         }
         else if (task.got is null)
         {
@@ -53,13 +53,13 @@ public class TaskRepository
         else
         {
             Console.WriteLine($"{Colors.Red}{task.Message}{ANSICodes.Reset}");
-            Console.Write($"Got: {Colors.Red}{task.got}{ANSICodes.Reset}");
-            Console.Write($"Expected: {Colors.Green}{task.expected}{ANSICodes.Reset}");
+            Console.Write($"{Text.Got}{Colors.Red}{task.got}{ANSICodes.Reset}");
+            Console.Write($"{Text.Expected}{Colors.Green}{task.expected}{ANSICodes.Reset}");
 
-            throw new Exception("Task failed");
+            throw new Exception(Text.TaskFailed);
         }
 
-        Console.WriteLine("\n-----------------------------\n\n");
+        Console.WriteLine($"\n{Text.Divider}\n\n");
 
         return taskSubmitResponse.content;
     }
@@ -70,9 +70,9 @@ public class TaskRepository
         {
             string celsius = FahrenheitToCelsius(task.parameters);
 
-            Console.WriteLine($"Task 1:\n{Colors.Magenta}{task.title}\n{task.description}{ANSICodes.Reset}");
-            Console.WriteLine($"Temperature in fahrenheit: {Colors.Red}{task.parameters}{ANSICodes.Reset}");
-            Console.WriteLine($"Temperature in celsius: {Colors.Green}{celsius}{ANSICodes.Reset}\n");
+            Console.WriteLine($"{Text.TaskOne}\n{Colors.Magenta}{task.title}\n{task.description}{ANSICodes.Reset}");
+            Console.WriteLine($"{Text.TemperatureInFahrenheit} {Colors.Red}{task.parameters}{ANSICodes.Reset}");
+            Console.WriteLine($"{Text.TemperatureInCelsius} {Colors.Green}{celsius}{ANSICodes.Reset}\n");
 
             return celsius;
         }
@@ -83,9 +83,8 @@ public class TaskRepository
 
             float fahrenheitFloat = float.Parse(fahrenheit);
             float celsius = (fahrenheitFloat - 32) * 5 / 9;
-            celsius = (float)Math.Round(celsius, 2);
 
-            return celsius.ToString("F2", culture);
+            return celsius.ToString(Text.TwoDecimal, culture);
         }
     }
 
@@ -93,17 +92,17 @@ public class TaskRepository
     {
         public static string Main(Task task)
         {
-            Console.WriteLine($"Task 2:\n{Colors.Magenta}{task.title}\n{task.description}{ANSICodes.Reset}");
-            Console.WriteLine($"Sequence: {Colors.Red}{task.parameters}{ANSICodes.Reset}");
+            Console.WriteLine($"{Text.TaskTwo}\n{Colors.Magenta}{task.title}\n{task.description}{ANSICodes.Reset}");
+            Console.WriteLine($"{Text.Sequence} {Colors.Red}{task.parameters}{ANSICodes.Reset}");
 
-            int[] sequence = task.parameters.Split(',').Select(int.Parse).ToArray();
+            int[] sequence = task.parameters.Split(Text.CharComma).Select(int.Parse).ToArray();
             string answer = "";
 
             foreach (int number in sequence.OrderBy(n => n))
             {
                 if (IsPrime(number))
                 {
-                    answer += number + ",";
+                    answer += number + Text.StringComma;
                 }
             }
 
