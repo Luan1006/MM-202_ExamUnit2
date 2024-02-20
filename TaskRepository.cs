@@ -15,12 +15,12 @@ public class TaskRepository
         return HttpUtils.instance.Get(Constants.baseURL + Constants.taskEndpoint + Constants.myPersonalID + "/" + taskID).Result;
     }
 
-    public static Response CreateSubmitResponse(string taskID, string answer)
+    public static Response GetTaskID(string taskID, string answer)
     {
         return HttpUtils.instance.Post(Constants.baseURL + Constants.taskEndpoint + Constants.myPersonalID + "/" + taskID, answer).Result;
     }
 
-    public static void EvaluateTaskResponse(Response taskSubmitResponse)
+    public static string EvaluateTaskResponse(Response taskSubmitResponse)
     {
         // Check if answer was correct
         if (taskSubmitResponse.content.Contains("taskID"))
@@ -38,6 +38,8 @@ public class TaskRepository
         }
 
         Console.WriteLine("\n-----------------------------\n\n");
+
+        return taskSubmitResponse.content;
     }
 
     public class Fahrenheit
@@ -50,7 +52,7 @@ public class TaskRepository
             Console.WriteLine($"Temperature in fahrenheit: {Colors.Red}{task.parameters}{ANSICodes.Reset}");
             Console.WriteLine($"Temperature in celsius: {Colors.Green}{celsius}{ANSICodes.Reset}\n");
 
-            Response taskResponse = CreateSubmitResponse(task.taskID, celsius);
+            Response taskResponse = GetTaskID(task.taskID, celsius);
 
             EvaluateTaskResponse(taskResponse);
 
@@ -65,7 +67,7 @@ public class TaskRepository
             float celsius = (fahrenheitFloat - 32) * 5 / 9;
             celsius = (float)Math.Round(celsius, 2);
 
-            return celsius.ToString(culture);
+            return celsius.ToString("F2", culture);
         }
     }
 }
