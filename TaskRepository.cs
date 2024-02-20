@@ -2,7 +2,6 @@ using HTTPUtils;
 using AnsiTools;
 using Colors = AnsiTools.ANSICodes.Colors;
 using static Constants;
-using System.Runtime.CompilerServices;
 
 public class TaskRepository
 {
@@ -39,28 +38,62 @@ public class TaskRepository
         return EvaluateTaskResponse(response);
     }
 
+    public static void PrintTaskCorrect()
+    {
+        Console.WriteLine($"{Colors.Green}{Text.Correct}{ANSICodes.Reset}");
+    }
+
+    public static void PrintGreenMessage(string message)
+    {
+        Console.WriteLine($"{Colors.Green}{message}{ANSICodes.Reset}");
+    }
+
+    public static void PrintRedMessage(string message)
+    {
+        Console.WriteLine($"{Colors.Red}{message}{ANSICodes.Reset}");
+    }
+
+    public static void PrintGotMessage(string got)
+    {
+        Console.WriteLine($"{Text.Got}{Colors.Red}{got}{ANSICodes.Reset}");
+    }
+
+    public static void PrintExpectedMessage(string expected)
+    {
+        Console.WriteLine($"{Text.Expected}{Colors.Green}{expected}{ANSICodes.Reset}");
+    }
+
+    public static void PrintTaskFailed(Task task)
+    {
+        PrintRedMessage(task.Message);
+        PrintGotMessage(task.got);
+        PrintExpectedMessage(task.expected);
+    }
+
+    public static void PrintDivider()
+    {
+        Console.WriteLine($"\n{Text.Divider}\n");
+    }
+
     public static string EvaluateTaskResponse(Response taskSubmitResponse)
     {
         Task task = new Task(taskSubmitResponse.content);
 
         if (task.taskID is not null)
         {
-            Console.WriteLine($"{Colors.Green}{Text.Correct}{ANSICodes.Reset}");
+            PrintTaskCorrect();
         }
         else if (task.got is null)
         {
-            Console.WriteLine($"{Colors.Green}{task.Message}{ANSICodes.Reset}");
+            PrintGreenMessage(task.Message);
         }
         else
         {
-            Console.WriteLine($"{Colors.Red}{task.Message}{ANSICodes.Reset}");
-            Console.Write($"{Text.Got}{Colors.Red}{task.got}{ANSICodes.Reset}");
-            Console.Write($"{Text.Expected}{Colors.Green}{task.expected}{ANSICodes.Reset}");
-
+            PrintTaskFailed(task);
             throw new Exception(Text.TaskFailed);
         }
 
-        Console.WriteLine($"\n{Text.Divider}\n");
+        PrintDivider();
 
         return taskSubmitResponse.content;
     }
@@ -152,8 +185,12 @@ public class TaskRepository
             var boundary = (int)Math.Floor(Math.Sqrt(number));
 
             for (int i = 3; i <= boundary; i += 2)
+            {
                 if (number % i == 0)
+                {
                     return false;
+                }
+            }
 
             return true;
         }
@@ -211,7 +248,10 @@ public class TaskRepository
 
         static int CalculateNextInSeries(int[] series)
         {
-            return series[series.Length - 1] - series[series.Length - 2] + series[series.Length - 1];
+            int lastInSeries = series[series.Length - 1];
+            int secondLastInSeries = series[series.Length - 2];
+
+            return lastInSeries * 2 - secondLastInSeries;
         }
     }
 }
