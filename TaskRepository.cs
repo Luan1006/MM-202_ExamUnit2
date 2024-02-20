@@ -77,4 +77,45 @@ public class TaskRepository
             return celsius.ToString(culture);
         }
     }
+
+    public class PrimeNumbers
+    {
+        public static string Main(Task task)
+        {
+            Console.WriteLine($"Task 2:\n{Colors.Magenta}{task.title}\n{task.description}{ANSICodes.Reset}");
+            Console.WriteLine($"Sequence: {Colors.Red}{task.parameters}{ANSICodes.Reset}");
+
+            int[] sequence = task.parameters.Split(',').Select(int.Parse).ToArray();
+            string answer = "";
+
+            foreach (int number in sequence.OrderBy(n => n))
+            {
+                if (IsPrime(number))
+                {
+                    answer += number + ",";
+                }
+            }
+
+            // Remove the trailing comma
+            answer = answer.TrimEnd(',');
+            Console.WriteLine($"Prime number(s): {Colors.Green}{answer}{ANSICodes.Reset}\n");
+
+            return answer;
+        }
+
+        private static bool IsPrime(int number)
+        {
+            if (number <= 1) return false;
+            if (number == 2) return true;
+            if (number % 2 == 0) return false;
+
+            var boundary = (int)Math.Floor(Math.Sqrt(number));
+
+            for (int i = 3; i <= boundary; i += 2)
+                if (number % i == 0)
+                    return false;
+
+            return true;
+        }
+    }
 }

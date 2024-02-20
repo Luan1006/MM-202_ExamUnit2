@@ -19,49 +19,18 @@ Task firstTask = GetTaskFromResponse(registrationTask.taskID);
 
 string firstTaskAnswer = Fahrenheit.Main(firstTask);
 
-string getStartTask2ResponsContent = CreateSubmitResponse(registrationTask.taskID, firstTaskAnswer);
+string getSecondTaskResponseContent = CreateSubmitResponse(registrationTask.taskID, firstTaskAnswer);
 
 //#### SECOND TASK
-Task initializeTask2 = new Task(getStartTask2ResponsContent);
-Task task2 = GetTaskFromResponse(initializeTask2.taskID);
+Task initSecondTask = new Task(getSecondTaskResponseContent);
 
-Console.WriteLine($"Task 2:\n{Colors.Magenta}{task2.title}\n{task2.description}{ANSICodes.Reset}");
-Console.WriteLine($"Sequence: {Colors.Red}{task2.parameters}{ANSICodes.Reset}");
+Task secondTask = GetTaskFromResponse(initSecondTask.taskID);
 
-int[] sequence = task2.parameters.Split(',').Select(int.Parse).ToArray();
-string task2Answer = "";
+string secondTaskAnswer = PrimeNumbers.Main(secondTask);
 
-static bool IsPrime(int number)
-{
-    if (number <= 1) return false;
-    if (number == 2) return true;
-    if (number % 2 == 0) return false;
+string getThirdTaskResponseContent = CreateSubmitResponse(initSecondTask.taskID, secondTaskAnswer);
 
-    var boundary = (int)Math.Floor(Math.Sqrt(number));
-
-    for (int i = 3; i <= boundary; i += 2)
-        if (number % i == 0)
-            return false;
-
-    return true;
-}
-
-foreach (int number in sequence.OrderBy(n => n))
-{
-    if (IsPrime(number))
-    {
-        task2Answer += number + ",";
-    }
-}
-
-// Remove the trailing comma
-task2Answer = task2Answer.TrimEnd(',');
-
-Console.WriteLine($"Prime number(s): {Colors.Green}{task2Answer}{ANSICodes.Reset}\n");
-Response task2SubmitResponse = await httpUtils.Post(baseURL + taskEndpoint + myPersonalID + "/" + task2.taskID, task2Answer);
-EvaluateTaskResponse(task2SubmitResponse);
-
-Task startTask3 = new Task(task2SubmitResponse.content);
+Task startTask3 = new Task(getThirdTaskResponseContent);
 
 //#### THIRD TASK
 Response task3Response = await httpUtils.Get(baseURL + taskEndpoint + myPersonalID + "/" + startTask3.taskID); // Get the task from the server
