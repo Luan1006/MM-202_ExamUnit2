@@ -14,28 +14,20 @@ HttpUtils httpUtils = HttpUtils.instance;
 //#### REGISTRATION
 Response startRespons = CreateStartResponse();
 string startResponsContent = startRespons.content;
-Task startTask1 = new Task(startResponsContent);
+Task initializeTask1 = new Task(startResponsContent);
 
 //#### FIRST TASK 
-Response task1Response = CreateTaskResponse(startTask1.taskID);
+Response task1Response = CreateTaskResponse(initializeTask1.taskID);
 string task1ResponseContent = task1Response.content;
 Task task1 = new Task(task1ResponseContent);
-Console.WriteLine($"Task 1:\n{Colors.Magenta}{task1.title}\n{task1.description}{ANSICodes.Reset}");
-Console.WriteLine($"Temperature in fahrenheit: {Colors.Red}{task1.parameters}{ANSICodes.Reset}");
 
-float fahrenheit = float.Parse(task1.parameters);
-float celsius = (fahrenheit - 32) * 5 / 9;
-celsius = (float)Math.Round(celsius, 2);
-string task1Answer = celsius.ToString();
+string getStartTask2ID = Fahrenheit.Main(task1);
 
-Console.WriteLine($"Temperature in celsius: {Colors.Green}{celsius}{ANSICodes.Reset}\n");
-Response task1SubmitResponse = CreateSubmitResponse(startTask1.taskID, task1Answer);
-Task startTask2 = new Task(task1SubmitResponse.content);
-
-EvaluateTaskResponse(task1SubmitResponse);
 
 //#### SECOND TASK
-Response task2Response = CreateTaskResponse(startTask2.taskID);
+Task initializeTask2 = new Task(getStartTask2ID);
+
+Response task2Response = CreateTaskResponse(initializeTask2.taskID);
 string task2ResponseContent = task2Response.content;
 Task task2 = new Task(task2ResponseContent);
 Console.WriteLine($"Task 2:\n{Colors.Magenta}{task2.title}\n{task2.description}{ANSICodes.Reset}");
@@ -129,21 +121,3 @@ Console.WriteLine($"Next number: {Colors.Green}{task4Answer}{ANSICodes.Reset}\n"
 
 Response task4SubmitResponse = await httpUtils.Post(baseURL + taskEndpoint + myPersonalID + "/" + task4.taskID, task4Answer.ToString());
 Console.WriteLine(task4SubmitResponse.content);
-
-static void EvaluateTaskResponse(Response taskSubmitResponse)
-{
-    // Check if answer was correct
-    if (taskSubmitResponse.content.Contains("taskID"))
-    {
-        Console.WriteLine($"{Colors.Green}Correct!{ANSICodes.Reset}");
-    }
-    else
-    {
-        Task taskFailed = new Task(taskSubmitResponse.content);
-        Console.WriteLine($"{Colors.Red}Incorrect!{ANSICodes.Reset}");
-        Console.Write($"Got: {Colors.Red}{taskFailed.got}{ANSICodes.Reset}");
-        Console.Write($"Expected: {Colors.Green}{taskFailed.expected}{ANSICodes.Reset}");
-    }
-
-    Console.WriteLine("\n-----------------------------\n\n");
-}
