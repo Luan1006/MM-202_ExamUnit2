@@ -12,37 +12,24 @@ Task registrationTask = GetTaskFromResponse();
 
 //#### FIRST TASK 
 Task firstTask = GetTaskFromResponse(registrationTask.taskID);
-
 string firstTaskAnswer = Fahrenheit.Main(firstTask);
-
 string getSecondTaskResponseContent = CreateSubmitResponse(registrationTask.taskID, firstTaskAnswer);
 
 //#### SECOND TASK
 Task initSecondTask = new Task(getSecondTaskResponseContent);
-
 Task secondTask = GetTaskFromResponse(initSecondTask.taskID);
-
 string secondTaskAnswer = PrimeNumbers.Main(secondTask);
-
 string getThirdTaskResponseContent = CreateSubmitResponse(initSecondTask.taskID, secondTaskAnswer);
 
 
 //#### THIRD TASK
 Task initThirdTask = new Task(getThirdTaskResponseContent);
-
 Task thirdTask = GetTaskFromResponse(initThirdTask.taskID);
-
 string thirdTaskAnswer = Roman.Main(thirdTask);
-
 string getFourthTaskResponseContent = CreateSubmitResponse(initThirdTask.taskID, thirdTaskAnswer);
 
 //#### FOURTH TASK
 Task initFourthTask = new Task(getFourthTaskResponseContent);
-
 Task fourthTask = GetTaskFromResponse(initFourthTask.taskID);
-
 string fourthTaskAnswer = Series.Main(fourthTask);
-
 string task4SubmitResponse = CreateSubmitResponse(initFourthTask.taskID, fourthTaskAnswer);
-
-Console.WriteLine(task4SubmitResponse);

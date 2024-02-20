@@ -1,6 +1,7 @@
 using HTTPUtils;
 using AnsiTools;
 using Colors = AnsiTools.ANSICodes.Colors;
+using static Constants;
 
 public class TaskRepository
 {
@@ -8,10 +9,10 @@ public class TaskRepository
     {
         if (taskID == null)
         {
-            return HttpUtils.instance.Get(Constants.baseURL + Constants.startEndpoint + Constants.myPersonalID).Result;
+            return HttpUtils.instance.Get(baseURL + startEndpoint + myPersonalID).Result;
         }
 
-        return HttpUtils.instance.Get(Constants.baseURL + Constants.taskEndpoint + Constants.myPersonalID + "/" + taskID).Result;
+        return HttpUtils.instance.Get(baseURL + taskEndpoint + myPersonalID + SLASH + taskID).Result;
     }
 
     public static Task GetTaskFromResponse(String content = null)
@@ -25,7 +26,7 @@ public class TaskRepository
 
     public static string CreateSubmitResponse(string taskID, string answer)
     {
-        Response response = HttpUtils.instance.Post(Constants.baseURL + Constants.taskEndpoint + Constants.myPersonalID + "/" + taskID, answer).Result;
+        Response response = HttpUtils.instance.Post(baseURL + taskEndpoint + myPersonalID + SLASH + taskID, answer).Result;
 
         return EvaluateTaskResponse(response);
     }
