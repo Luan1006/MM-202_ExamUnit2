@@ -11,25 +11,13 @@ HttpUtils httpUtils = HttpUtils.instance;
 Task registrationTask = GetTaskFromResponse();
 
 //#### FIRST TASK 
-Task firstTask = GetTaskFromResponse(registrationTask.taskID);
-string firstTaskAnswer = Fahrenheit.Main(firstTask);
-string getSecondTaskResponseContent = CreateSubmitResponse(registrationTask.taskID, firstTaskAnswer);
+string getSecondTaskResponseContent = ProcessTask(Fahrenheit.Main, registrationTask.taskID);
 
 //#### SECOND TASK
-Task initSecondTask = new Task(getSecondTaskResponseContent);
-Task secondTask = GetTaskFromResponse(initSecondTask.taskID);
-string secondTaskAnswer = PrimeNumbers.Main(secondTask);
-string getThirdTaskResponseContent = CreateSubmitResponse(initSecondTask.taskID, secondTaskAnswer);
-
+string getThirdTaskResponseContent = ProcessTask(PrimeNumbers.Main, new Task(getSecondTaskResponseContent).taskID);
 
 //#### THIRD TASK
-Task initThirdTask = new Task(getThirdTaskResponseContent);
-Task thirdTask = GetTaskFromResponse(initThirdTask.taskID);
-string thirdTaskAnswer = Roman.Main(thirdTask);
-string getFourthTaskResponseContent = CreateSubmitResponse(initThirdTask.taskID, thirdTaskAnswer);
+string getFourthTaskResponseContent = ProcessTask(Roman.Main, new Task(getThirdTaskResponseContent).taskID);
 
 //#### FOURTH TASK
-Task initFourthTask = new Task(getFourthTaskResponseContent);
-Task fourthTask = GetTaskFromResponse(initFourthTask.taskID);
-string fourthTaskAnswer = Series.Main(fourthTask);
-string task4SubmitResponse = CreateSubmitResponse(initFourthTask.taskID, fourthTaskAnswer);
+string getFifthTaskResponseContent = ProcessTask(Series.Main, new Task(getFourthTaskResponseContent).taskID);

@@ -5,6 +5,13 @@ using static Constants;
 
 public class TaskRepository
 {
+    public static string ProcessTask(Func<Task, string> taskProcessor, string taskId = null)
+    {
+        Task task = GetTaskFromResponse(taskId);
+        string taskAnswer = taskProcessor(task);
+        return CreateSubmitResponse(task.taskID, taskAnswer);
+    }
+
     private static Response CreateTaskResponse(string taskID)
     {
         if (taskID == null)
