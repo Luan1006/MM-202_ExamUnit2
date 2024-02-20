@@ -12,25 +12,19 @@ Console.WriteLine("Starting Assignment 2");
 HttpUtils httpUtils = HttpUtils.instance;
 
 //#### REGISTRATION
-Response registrationResponse = CreateStartResponse();
-string registrationResponseContent = registrationResponse.content;
-Task registrationTask = new Task(registrationResponseContent);
+Task registrationTask = GetTaskFromResponse();
 
 //#### FIRST TASK 
-Response firstTaskResponse = CreateTaskResponse(registrationTask.taskID);
-string firstTaskContent = firstTaskResponse.content;
-Task firstTask = new Task(firstTaskContent);
+Task firstTask = GetTaskFromResponse(registrationTask.taskID);
 
-string task1Answer = Fahrenheit.Main(firstTask);
+string firstTaskAnswer = Fahrenheit.Main(firstTask);
 
-string getStartTask2ResponsContent = CreateSubmitResponse(registrationTask.taskID, task1Answer);
+string getStartTask2ResponsContent = CreateSubmitResponse(registrationTask.taskID, firstTaskAnswer);
 
 //#### SECOND TASK
 Task initializeTask2 = new Task(getStartTask2ResponsContent);
+Task task2 = GetTaskFromResponse(initializeTask2.taskID);
 
-Response task2Response = CreateTaskResponse(initializeTask2.taskID);
-string task2ResponseContent = task2Response.content;
-Task task2 = new Task(task2ResponseContent);
 Console.WriteLine($"Task 2:\n{Colors.Magenta}{task2.title}\n{task2.description}{ANSICodes.Reset}");
 Console.WriteLine($"Sequence: {Colors.Red}{task2.parameters}{ANSICodes.Reset}");
 

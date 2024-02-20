@@ -5,14 +5,23 @@ using Colors = AnsiTools.ANSICodes.Colors;
 
 public class TaskRepository
 {
-    public static Response CreateStartResponse()
+    private static Response CreateTaskResponse(string taskID)
     {
-        return HttpUtils.instance.Get(Constants.baseURL + Constants.startEndpoint + Constants.myPersonalID).Result;
+        if (taskID == null)
+        {
+            return HttpUtils.instance.Get(Constants.baseURL + Constants.startEndpoint + Constants.myPersonalID).Result;
+        }
+
+        return HttpUtils.instance.Get(Constants.baseURL + Constants.taskEndpoint + Constants.myPersonalID + "/" + taskID).Result;
     }
 
-    public static Response CreateTaskResponse(string taskID)
+    public static Task GetTaskFromResponse(String content = null)
     {
-        return HttpUtils.instance.Get(Constants.baseURL + Constants.taskEndpoint + Constants.myPersonalID + "/" + taskID).Result;
+        Response response = CreateTaskResponse(content);
+        string responseContent = response.content;
+        Task task = new Task(responseContent);
+
+        return task;
     }
 
     public static string CreateSubmitResponse(string taskID, string answer)
