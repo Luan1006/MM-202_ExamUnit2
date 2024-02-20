@@ -12,18 +12,18 @@ Console.WriteLine("Starting Assignment 2");
 HttpUtils httpUtils = HttpUtils.instance;
 
 //#### REGISTRATION
-Response startRespons = CreateStartResponse();
-string startResponsContent = startRespons.content;
-Task initializeTask1 = new Task(startResponsContent);
+Response registrationResponse = CreateStartResponse();
+string registrationResponseContent = registrationResponse.content;
+Task registrationTask = new Task(registrationResponseContent);
 
 //#### FIRST TASK 
-Response task1Response = CreateTaskResponse(initializeTask1.taskID);
-string task1ResponseContent = task1Response.content;
-Task task1 = new Task(task1ResponseContent);
+Response firstTaskResponse = CreateTaskResponse(registrationTask.taskID);
+string firstTaskContent = firstTaskResponse.content;
+Task firstTask = new Task(firstTaskContent);
 
-string task1Answer = Fahrenheit.Main(task1);
+string task1Answer = Fahrenheit.Main(firstTask);
 
-string getStartTask2ResponsContent = CreateSubmitResponse(initializeTask1.taskID, task1Answer);
+string getStartTask2ResponsContent = CreateSubmitResponse(registrationTask.taskID, task1Answer);
 
 //#### SECOND TASK
 Task initializeTask2 = new Task(getStartTask2ResponsContent);
