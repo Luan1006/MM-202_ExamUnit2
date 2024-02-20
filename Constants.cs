@@ -16,37 +16,17 @@ public class Constants
         public const string Divider = "---------------------------------";
         public const string Parameter = "Parameter:";
         public const string Answer = "Answer:";
-
-        #region Fahrenheit
-
         public const string TaskOne = "Task 1:";
-        public const string TwoDecimal = "F2";
-
-        #endregion
-
-        #region PrimeNumbers
-
         public const string TaskTwo = "Task 2:";
+        public const string TaskThree = "Task 3:";
+        public const string TaskFour = "Task 4:";
+        public const string TwoDecimal = "F2";
         public const char CharComma = ',';
         public const string StringComma = ",";
-
-        #endregion
-
-        #region Roman
-
         public const char CharRomanOne = 'I';
         public const char CharRomanFive = 'V';
         public const char CharRomanTen = 'X';
         public const char CharRomanFifty = 'L';
         public const char CharRomanHundred = 'C';
-
-        public const string TaskThree = "Task 3:";
-
-        #endregion
-
-        #region Series
-        public const string TaskFour = "Task 4:";
-
-        #endregion
     }
 }
