@@ -102,7 +102,7 @@ public class TaskRepository
     public class Fahrenheit
     {
         private static readonly System.Globalization.CultureInfo culture = System.Globalization.CultureInfo.InvariantCulture; // InvariantCulture is used to avoid issues with different cultures (e.g. comma vs. dot as decimal separator)
-        public static string Main(Task task)
+        public static string Run(Task task)
         {
             string celsius = FahrenheitToCelsius(task.parameters);
 
@@ -122,7 +122,7 @@ public class TaskRepository
 
     public class PrimeNumbers
     {
-        public static string Main(Task task)
+        public static string Run(Task task)
         {
             int[] sequence = task.parameters.Split(Text.CharComma).Select(int.Parse).ToArray();
             string answer = "";
@@ -170,7 +170,7 @@ public class TaskRepository
             {Text.CharRomanHundred, 100},
         };
 
-        public static string Main(Task task)
+        public static string Run(Task task)
         {
             string answer = RomanToInteger(task.parameters).ToString();
 
@@ -199,17 +199,17 @@ public class TaskRepository
 
     public class Series
     {
-        public static string Main(Task task)
+        public static string Run(Task task)
         {
             int[] series = task.parameters.Split(Text.CharComma).Select(int.Parse).ToArray();
-            int answer = FindSeries(series);
+            int answer = CalculateNextInSeries(series);
 
             PrintTaskDetails(Text.TaskFour, task, answer.ToString());
 
             return answer.ToString();
         }
 
-        static int FindSeries(int[] series)
+        static int CalculateNextInSeries(int[] series)
         {
             return series[series.Length - 1] - series[series.Length - 2] + series[series.Length - 1];
         }

@@ -7,13 +7,13 @@ Console.WriteLine(Constants.Text.StartingAssignment);
 Task registrationTask = GetTaskFromResponse();
 
 // First task
-string getSecondTaskResponseContent = ProcessTask(Fahrenheit.Main, registrationTask.taskID);
+string getSecondTaskResponseContent = ProcessTask(Fahrenheit.Run, registrationTask.taskID);
 
 // Second task
-string getThirdTaskResponseContent = ProcessTask(PrimeNumbers.Main, new Task(getSecondTaskResponseContent).taskID);
+string getThirdTaskResponseContent = ProcessTask(PrimeNumbers.Run, new Task(getSecondTaskResponseContent).taskID);
 
 // Third task
-string getFourthTaskResponseContent = ProcessTask(Roman.Main, new Task(getThirdTaskResponseContent).taskID);
+string getFourthTaskResponseContent = ProcessTask(Roman.Run, new Task(getThirdTaskResponseContent).taskID);
 
 // Fourth task
-string getFifthTaskResponseContent = ProcessTask(Series.Main, new Task(getFourthTaskResponseContent).taskID);
+string getFifthTaskResponseContent = ProcessTask(Series.Run, new Task(getFourthTaskResponseContent).taskID);
