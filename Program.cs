@@ -3,6 +3,7 @@ using System.Text.Json;
 using AnsiTools;
 using Colors = AnsiTools.ANSICodes.Colors;
 using static TaskRepository;
+using static Constants;
 
 Console.Clear();
 Console.WriteLine("Starting Assignment 2");
