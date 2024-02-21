@@ -31,45 +31,45 @@ public class TaskRepository
         return task;
     }
 
-    public static string CreateSubmitResponse(string taskID, string answer)
+    private static string CreateSubmitResponse(string taskID, string answer)
     {
         Response response = HttpUtils.instance.Post(baseURL + taskEndpoint + myPersonalID + SLASH + taskID, answer).Result;
 
         return EvaluateTaskResponse(response);
     }
 
-    public static void PrintTaskCorrect()
+    private static void PrintTaskCorrect()
     {
         Console.WriteLine($"{Colors.Green}{Text.Correct}{ANSICodes.Reset}");
     }
 
-    public static void PrintColoredMessage(string message, string color)
+    private static void PrintColoredMessage(string message, string color)
     {
         Console.WriteLine($"{color}{message}{ANSICodes.Reset}");
     }
-    public static void PrintGotMessage(string got)
+    private static void PrintGotMessage(string got)
     {
         Console.WriteLine($"{Text.Got}{Colors.Red}{got}{ANSICodes.Reset}");
     }
 
-    public static void PrintExpectedMessage(string expected)
+    private static void PrintExpectedMessage(string expected)
     {
         Console.WriteLine($"{Text.Expected}{Colors.Green}{expected}{ANSICodes.Reset}");
     }
 
-    public static void PrintTaskFailed(Task task)
+    private static void PrintTaskFailed(Task task)
     {
         PrintColoredMessage(task.Message, Colors.Red);
         PrintGotMessage(task.got);
         PrintExpectedMessage(task.expected);
     }
 
-    public static void PrintDivider()
+    private static void PrintDivider()
     {
         Console.WriteLine($"\n{Text.Divider}\n");
     }
 
-    public static string EvaluateTaskResponse(Response taskSubmitResponse)
+    private static string EvaluateTaskResponse(Response taskSubmitResponse)
     {
         Task task = new Task(taskSubmitResponse.content);
 
@@ -117,7 +117,7 @@ public class TaskRepository
         Console.WriteLine($"{Colors.Green}{Text.Answer} {answer}{ANSICodes.Reset}\n");
     }
 
-    public static void PrintTaskDetails(String currentTask, Task task, String answer)
+    private static void PrintTaskDetails(String currentTask, Task task, String answer)
     {
         PrintCurrentTask(currentTask);
         PrintTaskTitle(task.title);
@@ -138,7 +138,7 @@ public class TaskRepository
             return celsius;
         }
 
-        public static string FahrenheitToCelsius(string fahrenheit)
+        private static string FahrenheitToCelsius(string fahrenheit)
         {
             float fahrenheitFloat = float.Parse(fahrenheit);
             float celsius = (fahrenheitFloat - 32) * 5 / 9;
@@ -151,23 +151,34 @@ public class TaskRepository
     {
         public static string Run(Task task)
         {
-            int[] sequence = task.parameters.Split(Text.CharComma).Select(int.Parse).ToArray();
-            string answer = "";
+            int[] sequence = ParseParameters(task.parameters);
+            string answer = GetPrimeNumbers(sequence);
+            PrintTaskDetails(Text.TaskTwo, task, answer);
+
+            return answer;
+        }
+
+        private static int[] ParseParameters(string parameters)
+        {
+            return parameters.Split(Text.CharComma).Select(int.Parse).ToArray();
+        }
+
+        private static string GetPrimeNumbers(int[] sequence)
+        {
+            string primeNumbers = "";
 
             foreach (int number in sequence.OrderBy(n => n))
             {
                 if (IsPrime(number))
                 {
-                    answer += number + Text.StringComma;
+                    primeNumbers += number + Text.StringComma;
                 }
             }
 
             // Remove the trailing comma
-            answer = answer.TrimEnd(Text.CharComma);
+            primeNumbers = primeNumbers.TrimEnd(Text.CharComma);
 
-            PrintTaskDetails(Text.TaskTwo, task, answer);
-
-            return answer;
+            return primeNumbers;
         }
 
         private static bool IsPrime(int number)
@@ -192,7 +203,7 @@ public class TaskRepository
 
     public class Roman
     {
-        static Dictionary<char, int> RomanNumber = new Dictionary<char, int>()
+        private static Dictionary<char, int> RomanNumber = new Dictionary<char, int>()
         {
             {Text.CharRomanOne, 1},
             {Text.CharRomanFive, 5},
@@ -210,7 +221,7 @@ public class TaskRepository
             return answer;
         }
 
-        static int RomanToInteger(string roman)
+        private static int RomanToInteger(string roman)
         {
             int number = 0;
             for (int i = 0; i < roman.Length; i++)
@@ -232,7 +243,7 @@ public class TaskRepository
     {
         public static string Run(Task task)
         {
-            int[] series = task.parameters.Split(Text.CharComma).Select(int.Parse).ToArray();
+            int[] series = ParseParameters(task.parameters);
             int answer = CalculateNextInSeries(series);
 
             PrintTaskDetails(Text.TaskFour, task, answer.ToString());
@@ -240,7 +251,12 @@ public class TaskRepository
             return answer.ToString();
         }
 
-        static int CalculateNextInSeries(int[] series)
+        private static int[] ParseParameters(string parameters)
+        {
+            return parameters.Split(Text.CharComma).Select(int.Parse).ToArray();
+        }
+
+        private static int CalculateNextInSeries(int[] series)
         {
             int lastInSeries = series[series.Length - 1];
             int secondLastInSeries = series[series.Length - 2];
