@@ -11,50 +11,29 @@ public class Task
     public string? Message { get; set; }
     public string? got { get; set; }
     public string? expected { get; set; }
-
+    
     public Task(string jsonContent)
     {
         JsonDocument jsonDocument = JsonDocument.Parse(jsonContent);
         JsonElement root = jsonDocument.RootElement;
 
-        if (root.TryGetProperty(TaskProperty.title, out JsonElement titleElement))
+        title = GetProperty(root, TaskProperty.title);
+        description = GetProperty(root, TaskProperty.description);
+        taskID = GetProperty(root, TaskProperty.taskID);
+        usierID = GetProperty(root, TaskProperty.usierID);
+        parameters = GetProperty(root, TaskProperty.parameters);
+        Message = GetProperty(root, TaskProperty.Message);
+        got = GetProperty(root, TaskProperty.got);
+        expected = GetProperty(root, TaskProperty.expected);
+    }
+
+    private string GetProperty(JsonElement root, string propertyName)
+    {
+        if (root.TryGetProperty(propertyName, out JsonElement element))
         {
-            title = titleElement.GetString();
+            return element.GetString();
         }
 
-        if (root.TryGetProperty(TaskProperty.description, out JsonElement descriptionElement))
-        {
-            description = descriptionElement.GetString();
-        }
-
-        if (root.TryGetProperty(TaskProperty.taskID, out JsonElement taskIdElement))
-        {
-            taskID = taskIdElement.GetString();
-        }
-
-        if (root.TryGetProperty(TaskProperty.usierID, out JsonElement userIdElement))
-        {
-            usierID = userIdElement.GetString();
-        }
-
-        if (root.TryGetProperty(TaskProperty.parameters, out JsonElement parametersElement))
-        {
-            parameters = parametersElement.GetString();
-        }
-
-        if (root.TryGetProperty(TaskProperty.Message, out JsonElement messageElement))
-        {
-            Message = messageElement.GetString();
-        }
-
-        if (root.TryGetProperty(TaskProperty.got, out JsonElement gotElement))
-        {
-            got = gotElement.GetString();
-        }
-
-        if (root.TryGetProperty(TaskProperty.expected, out JsonElement expectedElement))
-        {
-            expected = expectedElement.GetString();
-        }
+        return null;
     }
 }
