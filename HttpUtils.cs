@@ -52,14 +52,29 @@ namespace HTTPUtils
             return new Response() { content = null, statusCode = statusCode, url = url };
         }
 
+        private Response CreateResponse(string respons, int responseStatusCode, string url)
+        {
+            return new Response() { content = respons, statusCode = responseStatusCode, url = url };
+        }
+
         public async Task<Response> Get(string url)
+        {
+            return await SendGetRequest(url);
+        }
+
+        public async Task<Response> Post(string url, string content)
+        {
+            return await SendPostRequest(url, content);
+        }
+
+        private async Task<Response> SendGetRequest(string url)
         {
             try
             {
                 HttpResponseMessage response = await httpClient.GetAsync(url);
-                string content = await response.Content.ReadAsStringAsync();
+                string respons = await response.Content.ReadAsStringAsync();
 
-                return new Response() { content = content, statusCode = (int)response.StatusCode, url = url };
+                return CreateResponse(respons, (int)response.StatusCode, url);
             }
             catch (HttpRequestException e)
             {
@@ -67,15 +82,15 @@ namespace HTTPUtils
             }
         }
 
-        public async Task<Response> Post(string url, string content)
+        private async Task<Response> SendPostRequest(string url, string content)
         {
             try
             {
                 Answer answer = new Answer() { answer = content };
-                var response = await httpClient.PostAsJsonAsync(url, answer);
+                HttpResponseMessage response = await httpClient.PostAsJsonAsync(url, answer);
                 string respons = await response.Content.ReadAsStringAsync();
 
-                return new Response() { content = respons, statusCode = (int)response.StatusCode, url = url };
+                return CreateResponse(respons, (int)response.StatusCode, url);
             }
             catch (HttpRequestException e)
             {
