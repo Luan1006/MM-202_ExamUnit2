@@ -43,49 +43,45 @@ namespace HTTPUtils
 
         }
 
+        private Response HandleHttpRequestException(HttpRequestException e, string url)
+        {
+            int statusCode = (int)(e.StatusCode ?? 0);
+            Console.Error.WriteLine($"Error : {statusCode} ");
+            Console.Error.WriteLine(e.Message);
+
+            return new Response() { content = null, statusCode = statusCode, url = url };
+        }
 
         public async Task<Response> Get(string url)
         {
-            int statusCode = 0;
-            String? respons = null;
             try
             {
-                respons = await httpClient.GetStringAsync(url);
-                statusCode = 200;
+                HttpResponseMessage response = await httpClient.GetAsync(url);
+                string content = await response.Content.ReadAsStringAsync();
+
+                return new Response() { content = content, statusCode = (int)response.StatusCode, url = url };
             }
             catch (HttpRequestException e)
             {
-                statusCode = (int)(e.StatusCode ?? 0);
-                Console.Error.WriteLine($"Error : {statusCode} ");
-                Console.Error.WriteLine(e.Message);
+                return HandleHttpRequestException(e, url);
             }
-
-            return new Response() { content = respons, statusCode = statusCode, url = url };
-
         }
 
         public async Task<Response> Post(string url, string content)
         {
-            int statusCode = 0;
-            String? respons = null;
             try
             {
                 Answer answer = new Answer() { answer = content };
                 var response = await httpClient.PostAsJsonAsync(url, answer);
-                respons = await response.Content.ReadAsStringAsync();
-                statusCode = (int)response.StatusCode;
+                string respons = await response.Content.ReadAsStringAsync();
+
+                return new Response() { content = respons, statusCode = (int)response.StatusCode, url = url };
             }
             catch (HttpRequestException e)
             {
-                statusCode = (int)(e.StatusCode ?? 0);
-                Console.Error.WriteLine($"Error : {statusCode} ");
-                Console.Error.WriteLine(e.Message);
+                return HandleHttpRequestException(e, url);
             }
-
-            return new Response() { content = respons, statusCode = statusCode, url = url };
         }
-
-
     }
 
     class Answer
