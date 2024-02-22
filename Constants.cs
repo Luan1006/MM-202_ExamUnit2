@@ -20,7 +20,7 @@ public class Constants
 
     public class Text
     {
-        public const string StartingAssignment = "Starting Assignment 2";
+        public const string StartingAssignment = "Starting MM-202_ExamUnit2";
         public const string Correct = "Correct!";
         public const string Got = "Got: ";
         public const string Expected = "Expected: ";
