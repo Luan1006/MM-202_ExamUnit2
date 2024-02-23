@@ -27,6 +27,8 @@ namespace Tests
             Console.WriteLine($"{Constants.TestsPassed} {passed}");
             Console.WriteLine($"{Constants.TestsFailed} {failed}");
             Console.WriteLine($"{Constants.TotalTime}", time);
+            Thread.Sleep(4000);
+            Console.Clear();
         }
 
         public static void AreEqual(string expected, string actual, string testName, string message)
