@@ -17,7 +17,17 @@ public class TaskRepository
 
         public static string FahrenheitToCelsius(string fahrenheit)
         {
-            float fahrenheitFloat = float.Parse(fahrenheit);
+
+            float fahrenheitFloat;
+            try
+            {
+                fahrenheitFloat = float.Parse(fahrenheit);
+            }
+            catch (FormatException)
+            {
+                return "Input must be a valid number.";
+            }
+
             float celsius = (fahrenheitFloat - 32) * 5 / 9;
 
             return celsius.ToString(Text.TwoDecimal, culture);
@@ -49,7 +59,7 @@ public class TaskRepository
             }
             catch (FormatException)
             {
-                sequence = [];    
+                sequence = [];
             }
 
             return sequence;

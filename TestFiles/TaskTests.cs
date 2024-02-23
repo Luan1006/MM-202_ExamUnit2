@@ -131,7 +131,7 @@ namespace Tests
         {
             // Arrange
             string fahrenheit = "";
-            string expected = "Input cannot be empty.";
+            string expected = "Input must be a valid number.";
 
             // Act
             var actual = Fahrenheit.FahrenheitToCelsius(fahrenheit);
@@ -160,7 +160,7 @@ namespace Tests
             var actual = string.Join(",", PrimeNumbers.ParseParameters(parameters));
 
             // Assert
-            TaskTests.AreEqual(expected, actual, "PrimeNumbers.ParseParameters with valid parameters", "Did not return the expected number sequence");
+            TaskTests.AreEqual(expected, actual, "PrimeNumbers Test: Parse Valid Parameters", "Did not return the expected number sequence");
         }
 
         private void ParseParameters_WithInvalidParameters_ReturnsEmptyList()
@@ -173,7 +173,7 @@ namespace Tests
             var actual = string.Join(",", PrimeNumbers.ParseParameters(parameters));
 
             // Assert
-            TaskTests.AreEqual(expected, actual, "PrimeNumbers.ParseParameters with invalid parameters", "Did not return an empty list");
+            TaskTests.AreEqual(expected, actual, "PrimeNumbers Test: Parse Invalid Parameters", "Did not return an empty list");
         }
 
         private void GetPrimeNumbers_WithValidSequence_ReturnsPrimeNumbers()
@@ -186,7 +186,7 @@ namespace Tests
             var actual = string.Join(",", PrimeNumbers.GetPrimeNumbers(sequence));
 
             // Assert
-            TaskTests.AreEqual(expected, actual, "PrimeNumbers.GetPrimeNumbers with valid sequence", "Did not return the expected prime numbers");
+            TaskTests.AreEqual(expected, actual, "PrimeNumbers Test: Get Primes from Valid Sequence", "Did not return the expected prime numbers");
         }
 
         private void GetPrimeNumbers_WithInvalidSequence_ReturnsEmptyList()
@@ -199,7 +199,7 @@ namespace Tests
             var actual = string.Join(",", PrimeNumbers.GetPrimeNumbers(sequence));
 
             // Assert
-            TaskTests.AreEqual(expected, actual, "PrimeNumbers.GetPrimeNumbers with invalid sequence", "Did not return an empty list");
+            TaskTests.AreEqual(expected, actual, "PrimeNumbers Test: Get Primes from Invalid Sequence", "Did not return an empty list");
         }
     }
 }
