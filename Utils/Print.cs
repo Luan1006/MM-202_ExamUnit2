@@ -79,7 +79,7 @@ public class Print
         PrintTime(elapsedMilliseconds);
     }
 
-    public static void PrintTaskDetails(String currentTask, Task task, string answer)
+    public static void PrintTaskDetails(string currentTask, Task task, string answer)
     {
         PrintCurrentTask(currentTask);
         PrintTaskTitle(task.title);

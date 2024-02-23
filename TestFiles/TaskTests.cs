@@ -1,6 +1,5 @@
 using System.Diagnostics;
 using Colors = AnsiTools.ANSICodes.Colors;
-using static TaskRepository;
 using static Constants;
 
 namespace Tests
