@@ -18,7 +18,7 @@ public class Print
         }
         else
         {
-            PrintCentered($"{color}{message}{ANSICodes.Reset}");
+            PrintCentered($"{color}{message}{ANSICodes.Reset}", newLine);
         }
     }
 

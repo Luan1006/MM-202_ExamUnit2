@@ -24,9 +24,9 @@ namespace Tests
             SeriesTests seriesTests = new SeriesTests();
             seriesTests.Run();
 
-            Console.WriteLine($"{Constants.TestsPassed} {passed}");
-            Console.WriteLine($"{Constants.TestsFailed} {failed}");
-            Console.WriteLine($"{Constants.TotalTime}", time);
+            Print.PrintCentered($"{Constants.TestsPassed} {passed}");
+            Print.PrintCentered($"{Constants.TestsFailed} {failed}");
+            Print.PrintCentered(string.Format($"{Constants.TotalTime}", time));
             Thread.Sleep(4000);
             Console.Clear();
         }
