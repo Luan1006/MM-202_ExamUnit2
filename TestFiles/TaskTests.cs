@@ -19,6 +19,9 @@ namespace Tests
             PrimeNumbersTests primeNumbersTests = new PrimeNumbersTests();
             primeNumbersTests.Run();
 
+            RomanTests romanTests = new RomanTests();
+            romanTests.Run();
+
             Console.WriteLine($"Tests passed: {passed}");
             Console.WriteLine($"Tests failed: {failed}");
             Console.WriteLine($"Total time: {time} ms\n");
@@ -201,5 +204,122 @@ namespace Tests
             // Assert
             TaskTests.AreEqual(expected, actual, "PrimeNumbers Test: Get Primes from Invalid Sequence", "Did not return an empty list");
         }
+    }
+
+    public class RomanTests
+    {
+        public void Run()
+        {
+            RomanToInteger_WhenInputIsI_Returns1();
+            RomanToInteger_WhenInputIsV_Returns5();
+            RomanToInteger_WhenInputIsX_Returns10();
+            RomanToInteger_WhenInputIsL_Returns50();
+            RomanToInteger_WhenInputIsC_Returns100();
+            RomanToInteger_WhenInputIsIV_Returns4();
+            RomanToInteger_WhenInputIsIX_Returns9();
+            RomanToInteger_WhenInputIsEmpty_Returns0();
+            RomanToInteger_WhenInputIsInvalid_Returns0();
+        }
+
+        public void RomanToInteger_WhenInputIsI_Returns1()
+        {
+            // Arrange
+            string roman = "I";
+            string expected = "1";
+            // Act
+            var actual = Roman.RomanToInteger(roman).ToString();
+
+            TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of I", "RomanToInteger_WhenInputIsI_Returns1 did not return the expected value");
+        }
+
+        public void RomanToInteger_WhenInputIsV_Returns5()
+        {
+            // Arrange
+            string roman = "V";
+            string expected = "5";
+            // Act
+            var actual = Roman.RomanToInteger(roman).ToString();
+
+            TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of V", "RomanToInteger_WhenInputIsV_Returns5 did not return the expected value");
+        }
+
+        public void RomanToInteger_WhenInputIsX_Returns10()
+        {
+            // Arrange
+            string roman = "X";
+            string expected = "10";
+            // Act
+            var actual = Roman.RomanToInteger(roman).ToString();
+
+            TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of X", "RomanToInteger_WhenInputIsX_Returns10 did not return the expected value");
+        }
+
+        public void RomanToInteger_WhenInputIsL_Returns50()
+        {
+            // Arrange
+            string roman = "L";
+            string expected = "50";
+            // Act
+            var actual = Roman.RomanToInteger(roman).ToString();
+
+            TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of L", "RomanToInteger_WhenInputIsL_Returns50 did not return the expected value");
+        }
+
+        public void RomanToInteger_WhenInputIsC_Returns100()
+        {
+            // Arrange
+            string roman = "C";
+            string expected = "100";
+            // Act
+            var actual = Roman.RomanToInteger(roman).ToString();
+
+            TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of C", "RomanToInteger_WhenInputIsC_Returns100 did not return the expected value");
+        }
+
+        public void RomanToInteger_WhenInputIsIV_Returns4()
+        {
+            // Arrange
+            string roman = "IV";
+            string expected = "4";
+            // Act
+            var actual = Roman.RomanToInteger(roman).ToString();
+
+            TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of IV", "RomanToInteger_WhenInputIsIV_Returns4 did not return the expected value");
+        }
+
+        public void RomanToInteger_WhenInputIsIX_Returns9()
+        {
+            // Arrange
+            string roman = "IX";
+            string expected = "9";
+            // Act
+            var actual = Roman.RomanToInteger(roman).ToString();
+
+            TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of IX", "RomanToInteger_WhenInputIsIX_Returns9 did not return the expected value");
+        }
+
+        public void RomanToInteger_WhenInputIsEmpty_Returns0()
+        {
+            // Arrange
+            string roman = "";
+            string expected = "0";
+            // Act
+            var actual = Roman.RomanToInteger(roman).ToString();
+
+            TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of Empty String", "RomanToInteger_WhenInputIsEmpty_Returns0 did not return the expected value");
+        }
+
+        public void RomanToInteger_WhenInputIsInvalid_Returns0()
+        {
+            // Arrange
+            string roman = "Z";
+            string expected = "0";
+            // Act
+            var actual = Roman.RomanToInteger(roman).ToString();
+
+            TaskTests.AreEqual(expected, actual, "Roman Test: Invalid Roman Numeral", "RomanToInteger_WhenInputIsInvalid_ReturnsMinusOne did not return the expected value");
+        }
+
+
     }
 }

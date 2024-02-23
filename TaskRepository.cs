@@ -123,11 +123,16 @@ public class TaskRepository
             return answer;
         }
 
-        private static int RomanToInteger(string roman)
+        public static int RomanToInteger(string roman)
         {
             int number = 0;
             for (int i = 0; i < roman.Length; i++)
             {
+                if (!RomanNumber.ContainsKey(roman[i]))
+                {
+                    return 0;
+                }
+
                 if (i + 1 < roman.Length && RomanNumber[roman[i]] < RomanNumber[roman[i + 1]])
                 {
                     number -= RomanNumber[roman[i]];
