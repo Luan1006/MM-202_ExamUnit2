@@ -2,6 +2,7 @@ using HTTPUtils;
 using AnsiTools;
 using Colors = AnsiTools.ANSICodes.Colors;
 using static Constants;
+using static Print;
 
 public class TaskRepository
 {
@@ -22,7 +23,7 @@ public class TaskRepository
         return HttpUtils.instance.Get(baseURL + taskEndpoint + myPersonalID + SLASH + taskID).Result;
     }
 
-    public static Task GetTaskFromResponse(String content = null)
+    public static Task GetTaskFromResponse(string content = null)
     {
         Response response = CreateTaskResponse(content);
         string responseContent = response.content;
@@ -36,37 +37,6 @@ public class TaskRepository
         Response response = HttpUtils.instance.Post(baseURL + taskEndpoint + myPersonalID + SLASH + taskID, answer).Result;
 
         return EvaluateTaskResponse(response);
-    }
-
-    private static void PrintTaskCorrect()
-    {
-        Console.WriteLine($"{Colors.Green}{Text.Correct}{ANSICodes.Reset}");
-    }
-
-    private static void PrintColoredMessage(string message, string color)
-    {
-        Console.WriteLine($"{color}{message}{ANSICodes.Reset}");
-    }
-    private static void PrintGotMessage(string got)
-    {
-        Console.WriteLine($"{Text.Got}{Colors.Red}{got}{ANSICodes.Reset}");
-    }
-
-    private static void PrintExpectedMessage(string expected)
-    {
-        Console.WriteLine($"{Text.Expected}{Colors.Green}{expected}{ANSICodes.Reset}");
-    }
-
-    private static void PrintTaskFailed(Task task)
-    {
-        PrintColoredMessage(task.Message, Colors.Red);
-        PrintGotMessage(task.got);
-        PrintExpectedMessage(task.expected);
-    }
-
-    private static void PrintDivider()
-    {
-        Console.WriteLine($"\n{Text.Divider}\n");
     }
 
     private static string EvaluateTaskResponse(Response taskSubmitResponse)
@@ -90,40 +60,6 @@ public class TaskRepository
         PrintDivider();
 
         return taskSubmitResponse.content;
-    }
-
-    private static void PrintCurrentTask(string currentTask)
-    {
-        Console.WriteLine($"\n{ANSICodes.Effects.Bold}{Colors.Magenta}{currentTask}{ANSICodes.Reset}");
-    }
-
-    private static void PrintTaskTitle(string title)
-    {
-        Console.WriteLine($"\n{Colors.Cyan}{title}{ANSICodes.Reset}");
-    }
-
-    private static void PrintTaskDescription(string description)
-    {
-        Console.WriteLine($"{Colors.White}{description}{ANSICodes.Reset}\n");
-    }
-
-    private static void PrintTaskParameter(string parameter)
-    {
-        Console.WriteLine($"{Colors.Red}{Text.Parameter} {parameter}{ANSICodes.Reset}");
-    }
-
-    private static void PrintTaskAnswer(string answer)
-    {
-        Console.WriteLine($"{Colors.Green}{Text.Answer} {answer}{ANSICodes.Reset}\n");
-    }
-
-    private static void PrintTaskDetails(String currentTask, Task task, String answer)
-    {
-        PrintCurrentTask(currentTask);
-        PrintTaskTitle(task.title);
-        PrintTaskDescription(task.description);
-        PrintTaskParameter(task.parameters);
-        PrintTaskAnswer(answer);
     }
 
     public class Fahrenheit
