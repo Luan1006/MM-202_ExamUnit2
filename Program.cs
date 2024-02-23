@@ -1,6 +1,6 @@
-﻿using static TaskRepository;
-using static TaskProcessor;
+﻿using TaskRepository;
 using Tests;
+using static TaskProcessor;
 
 class Program
 {
