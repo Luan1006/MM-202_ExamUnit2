@@ -40,12 +40,22 @@ public class TaskRepository
             return answer;
         }
 
-        private static int[] ParseParameters(string parameters)
+        public static int[] ParseParameters(string parameters)
         {
-            return parameters.Split(Text.CharComma).Select(int.Parse).ToArray();
+            int[] sequence;
+            try
+            {
+                sequence = parameters.Split(Text.CharComma).Select(int.Parse).ToArray();
+            }
+            catch (FormatException)
+            {
+                sequence = [];    
+            }
+
+            return sequence;
         }
 
-        private static string GetPrimeNumbers(int[] sequence)
+        public static string GetPrimeNumbers(int[] sequence)
         {
             string primeNumbers = "";
 

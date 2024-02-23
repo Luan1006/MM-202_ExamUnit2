@@ -16,6 +16,9 @@ namespace Tests
             FahrenheitTests fahrenheitTests = new FahrenheitTests();
             fahrenheitTests.Run();
 
+            PrimeNumbersTests primeNumbersTests = new PrimeNumbersTests();
+            primeNumbersTests.Run();
+
             Console.WriteLine($"Tests passed: {passed}");
             Console.WriteLine($"Tests failed: {failed}");
             Console.WriteLine($"Total time: {time} ms\n");
@@ -46,12 +49,16 @@ namespace Tests
     {
         public void Run()
         {
-            FahrenheitUsesCorrectParameter();
-            FahrenheitUsesInvariantCulture();
+            UsesCorrectParameter_ReturnsExpectedParameter();
+            GetCultureInfo_ReturnsInvariantCulture();
             FahrenheitToCelsius_WhenInputIs32_Returns0();
+            FahrenheitToCelsius_WhenInputIsNegative_ReturnsExpectedResult();
+            FahrenheitToCelsius_WhenInputIsZero_ReturnsExpectedResult();
+            FahrenheitToCelsius_WhenInputIsNonNumeric_ReturnsErrorMessage();
+            FahrenheitToCelsius_WhenInputIsEmpty_ReturnsErrorMessage();
         }
 
-        public void FahrenheitUsesCorrectParameter()
+        public void UsesCorrectParameter_ReturnsExpectedParameter()
         {
             // Arrange
             string jsonContent = "{\"title\":\"Fahrenheit to Celsius\",\"description\":\"Converts a temperature in Fahrenheit to Celsius\",\"taskID\":\"1\",\"usierID\":\"1\",\"parameters\":\"32\",\"Message\":\"\",\"got\":\"\",\"expected\":\"0.00\"}";
@@ -60,9 +67,10 @@ namespace Tests
             // Act
             var actual = task.parameters;
 
-            TaskTests.AreEqual(expected, actual, "Fahrenheit Correct Parameter", "FahrenheitUsesCorrectParameter did not return the expected value");
+            TaskTests.AreEqual(expected, actual, "Fahrenheit Test: Correct Parameter", "UsesCorrectParameter_ReturnsExpectedParameter did not return the expected value");
         }
-        public void FahrenheitUsesInvariantCulture()
+
+        public void GetCultureInfo_ReturnsInvariantCulture()
         {
             // Arrange
             System.Globalization.CultureInfo expected = System.Globalization.CultureInfo.InvariantCulture;
@@ -71,7 +79,7 @@ namespace Tests
             var actual = Fahrenheit.GetCultureInfo();
 
             // Assert
-            TaskTests.AreEqual(expected.ToString(), actual.ToString(), "Fahrenheit Culture", "Fahrenheit does not use InvariantCulture");
+            TaskTests.AreEqual(expected.ToString(), actual.ToString(), "Fahrenheit Test: Invariant Culture", "GetCultureInfo_ReturnsInvariantCulture does not use InvariantCulture");
         }
 
         public void FahrenheitToCelsius_WhenInputIs32_Returns0()
@@ -82,12 +90,116 @@ namespace Tests
             // Act
             var actual = Fahrenheit.FahrenheitToCelsius(fahrenheit);
 
-            TaskTests.AreEqual(expected, actual, "Fahrenheit Input and Return", "FahrenheitToCelsius did not return the expected value");
+            TaskTests.AreEqual(expected, actual, "Fahrenheit Test: Conversion of 32F", "FahrenheitToCelsius_WhenInputIs32_Returns0 did not return the expected value");
+        }
+
+        public void FahrenheitToCelsius_WhenInputIsNegative_ReturnsExpectedResult()
+        {
+            // Arrange
+            string fahrenheit = "-40";
+            string expected = "-40.00";
+            // Act
+            var actual = Fahrenheit.FahrenheitToCelsius(fahrenheit);
+
+            TaskTests.AreEqual(expected, actual, "Fahrenheit Test: Conversion of Negative Value", "FahrenheitToCelsius_WhenInputIsNegative_ReturnsExpectedResult did not return the expected value");
+        }
+
+        public void FahrenheitToCelsius_WhenInputIsZero_ReturnsExpectedResult()
+        {
+            // Arrange
+            string fahrenheit = "0";
+            string expected = "-17.78";
+            // Act
+            var actual = Fahrenheit.FahrenheitToCelsius(fahrenheit);
+
+            TaskTests.AreEqual(expected, actual, "Fahrenheit Test: Conversion of 0F", "FahrenheitToCelsius_WhenInputIsZero_ReturnsExpectedResult did not return the expected value");
+        }
+
+        public void FahrenheitToCelsius_WhenInputIsNonNumeric_ReturnsErrorMessage()
+        {
+            // Arrange
+            string fahrenheit = "abc";
+            string expected = "Input must be a valid number.";
+
+            // Act
+            var actual = Fahrenheit.FahrenheitToCelsius(fahrenheit);
+
+            TaskTests.AreEqual(expected, actual, "Fahrenheit Test: Non-Numeric Input", "FahrenheitToCelsius_WhenInputIsNonNumeric_ReturnsErrorMessage did not return the expected error message");
+        }
+
+        public void FahrenheitToCelsius_WhenInputIsEmpty_ReturnsErrorMessage()
+        {
+            // Arrange
+            string fahrenheit = "";
+            string expected = "Input cannot be empty.";
+
+            // Act
+            var actual = Fahrenheit.FahrenheitToCelsius(fahrenheit);
+
+            TaskTests.AreEqual(expected, actual, "Fahrenheit Test: Empty Input", "FahrenheitToCelsius_WhenInputIsEmpty_ReturnsErrorMessage did not return the expected error message");
         }
     }
 
     public class PrimeNumbersTests
     {
-        
+        public void Run()
+        {
+            ParseParameters_WithValidParameters_ReturnsNumberSequence();
+            ParseParameters_WithInvalidParameters_ReturnsEmptyList();
+            GetPrimeNumbers_WithValidSequence_ReturnsPrimeNumbers();
+            GetPrimeNumbers_WithInvalidSequence_ReturnsEmptyList();
+        }
+
+        private void ParseParameters_WithValidParameters_ReturnsNumberSequence()
+        {
+            // Arrange
+            string parameters = "2,3,4,5,6,7,8,9,10";
+            var expected = "2,3,4,5,6,7,8,9,10";
+
+            // Act
+            var actual = string.Join(",", PrimeNumbers.ParseParameters(parameters));
+
+            // Assert
+            TaskTests.AreEqual(expected, actual, "PrimeNumbers.ParseParameters with valid parameters", "Did not return the expected number sequence");
+        }
+
+        private void ParseParameters_WithInvalidParameters_ReturnsEmptyList()
+        {
+            // Arrange
+            string parameters = "2,3,4,abc,6,7,8,9,10";
+            var expected = "";
+
+            // Act
+            var actual = string.Join(",", PrimeNumbers.ParseParameters(parameters));
+
+            // Assert
+            TaskTests.AreEqual(expected, actual, "PrimeNumbers.ParseParameters with invalid parameters", "Did not return an empty list");
+        }
+
+        private void GetPrimeNumbers_WithValidSequence_ReturnsPrimeNumbers()
+        {
+            // Arrange
+            int[] sequence = { 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            var expected = "2,3,5,7";
+
+            // Act
+            var actual = string.Join(",", PrimeNumbers.GetPrimeNumbers(sequence));
+
+            // Assert
+            TaskTests.AreEqual(expected, actual, "PrimeNumbers.GetPrimeNumbers with valid sequence", "Did not return the expected prime numbers");
+        }
+
+        private void GetPrimeNumbers_WithInvalidSequence_ReturnsEmptyList()
+        {
+            // Arrange
+            int[] sequence = { 1, 4, 6, 8, 9, 10 };
+            var expected = "";
+
+            // Act
+            var actual = string.Join(",", PrimeNumbers.GetPrimeNumbers(sequence));
+
+            // Assert
+            TaskTests.AreEqual(expected, actual, "PrimeNumbers.GetPrimeNumbers with invalid sequence", "Did not return an empty list");
+        }
     }
 }
