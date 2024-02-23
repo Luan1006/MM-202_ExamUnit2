@@ -1,6 +1,6 @@
 using System.Globalization;
 using TaskRepository;
-using static Tests.Constants;
+using static Tests.FahrenheitTestConstants;
 
 namespace Tests
 {

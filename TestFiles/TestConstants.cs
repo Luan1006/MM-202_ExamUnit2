@@ -5,10 +5,12 @@ namespace Tests
         public const string TestsPassed = "Tests passed: ";
         public const string TestsFailed = "Tests failed: ";
         public const string TotalTime = "Total time: {0} ms\n";
+    }
 
-        #region Fahrenheit
+    public class FahrenheitTestConstants
+    {
 
-        #region FahrenheitTests Parameters
+        #region Parameters
 
         public const string FahrenheitParameter32F = "32";
         public const string FahrenheitParameterNegative40F = "-40";
@@ -18,7 +20,7 @@ namespace Tests
 
         #endregion
 
-        #region FahrenheitTests Expected Values
+        #region Expected Values
         public const string FahrenheitExpected32 = "32";
         public const string FahrenheitExpected0F = "0.00";
         public const string FahrenheitExpectedNegative40F = "-40.00";
@@ -26,7 +28,7 @@ namespace Tests
         public const string FahrenheitExpectedErrorMessage = "Input must be a valid number.";
         #endregion
 
-        #region FahrenheitTests Titles
+        #region Titles
         public const string FahrenheitTestCorrectParameter = "Fahrenheit Test: Correct Parameter";
         public const string FahrenheitTestInvariantCulture = "Fahrenheit Test: Invariant Culture";
         public const string FahrenheitTestConversionOf32F = "Fahrenheit Test: Conversion of 32F";
@@ -36,7 +38,7 @@ namespace Tests
         public const string FahrenheitTestConversionOfEmptyF = "Fahrenheit Test: Conversion of empty F";
         #endregion
 
-        #region FahrenheitTests FailMessages
+        #region Fail Messages
         public const string FahrenheitTestCorrectParameterDidNotReturnExpectedValue = "UsesCorrectParameter_ReturnsExpectedParameter did not return the expected value";
         public const string FahrenheitTestInvariantCultureDoesNotUseInvariantCulture = "GetCultureInfo_ReturnsInvariantCulture does not use InvariantCulture";
         public const string FahrenheitTestConversionOf32FDidNotReturnExpectedValue = "FahrenheitToCelsius_WhenInputIs32_Returns0 did not return the expected value";
@@ -44,8 +46,6 @@ namespace Tests
         public const string FahrenheitTestConversionOf0FDidNotReturnExpectedValue = "FahrenheitToCelsius_WhenInputIsZero_ReturnsExpectedResult did not return the expected value";
         public const string FahrenheitTestConversionOfNonNumericFDidNotReturnExpectedValue = "FahrenheitToCelsius_WhenInputIsNonNumeric_ReturnsErrorMessage did not return the expected value";
         public const string FahrenheitTestConversionOfEmptyFDidNotReturnExpectedValue = "FahrenheitToCelsius_WhenInputIsEmpty_ReturnsErrorMessage did not return the expected value";
-        #endregion
-
         #endregion
     }
 }
