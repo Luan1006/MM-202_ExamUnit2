@@ -1,4 +1,5 @@
 using TaskRepository;
+using static Tests.SeriesTestConstants;
 
 namespace Tests
 {
@@ -16,57 +17,58 @@ namespace Tests
         private void CalculateNextInSeries_WhenInputIs123_Returns4()
         {
             // Arrange
-            int[] series = { 1, 2, 3 };
-            string expected = "4";
+            int[] series = Series123;
+            string expected = Expected4;
             // Act
             string actual = Series.CalculateNextInSeries(series).ToString();
 
-            TaskTests.AreEqual(expected, actual, "Series Test: Next in series of 1,2,3", "CalculateNextInSeries_WhenInputIs123_Returns4 did not return the expected value");
+            TaskTests.AreEqual(expected, actual, TestTitle123, FailMessage123);
         }
 
         private void CalculateNextInSeries_WhenInputIs246_Returns8()
         {
             // Arrange
-            int[] series = { 2, 4, 6 };
-            string expected = "8";
+            int[] series = Series246;
+            string expected = Expected8;
             // Act
             string actual = Series.CalculateNextInSeries(series).ToString();
 
-            TaskTests.AreEqual(expected, actual, "Series Test: Next in series of 2,4,6", "CalculateNextInSeries_WhenInputIs246_Returns8 did not return the expected value");
+            TaskTests.AreEqual(expected, actual, TestTitle246, FailMessage246);
         }
 
         private void CalculateNextInSeries_WhenInputIsEmpty_Returns0()
         {
             // Arrange
-            int[] series = { };
-            string expected = "0";
+            int[] series = SeriesEmpty;
+            string expected = Expected0;
             // Act
             string actual = Series.CalculateNextInSeries(series).ToString();
 
-            TaskTests.AreEqual(expected, actual, "Series Test: Next in series of empty string", "CalculateNextInSeries_WhenInputIsEmpty_Returns0 did not return the expected value");
+            TaskTests.AreEqual(expected, actual, TestTitleEmpty, FailMessageEmpty);
         }
+
         public void ParseParameters_WhenInputIsValid_ReturnsCorrectArray()
         {
             // Arrange
-            string parameters = "1,2,3";
-            int[] expected = { 1, 2, 3 };
+            string parameters = Parameters123;
+            int[] expected = Expected123;
             // Act
             int[] actual = Series.ParseParameters(parameters);
 
             // Assert
-            TaskTests.AreEqual(expected, actual, "Series Test: Parse Parameters", "ParseParameters_WhenInputIsValid_ReturnsCorrectArray did not return the expected value");
+            TaskTests.AreEqual(expected, actual, TestTitleParseParameters, FailMessageParseParameters);
         }
 
         public void ParseParameters_WhenInputIsInvalid_ReturnsEmptyArray()
         {
             // Arrange
-            string parameters = "1,2,3,abc";
-            int[] expected = { };
+            string parameters = Parameters123abc;
+            int[] expected = ExpectedEmptyArray;
             // Act
             int[] actual = Series.ParseParameters(parameters);
 
             // Assert
-            TaskTests.AreEqual(expected, actual, "Series Test: Parse Invalid Parameters", "ParseParameters_WhenInputIsInvalid_ReturnsEmptyArray did not return the expected value");
+            TaskTests.AreEqual(expected, actual, TestTitleParseInvalidParameters, FailMessageParseInvalidParameters);
         }
     }
 }

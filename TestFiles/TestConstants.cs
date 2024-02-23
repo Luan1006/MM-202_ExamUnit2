@@ -132,5 +132,41 @@ namespace Tests
         #endregion
     }
 
-    
+    public class SeriesTestConstants
+    {
+        #region Series
+        public static readonly int[] Series123 = { 1, 2, 3 };
+        public static readonly int[] Series246 = { 2, 4, 6 };
+        public static readonly int[] SeriesEmpty = { };
+        #endregion
+
+        #region Expected Values
+        public const string Expected4 = "4";
+        public const string Expected8 = "8";
+        public const string Expected0 = "0";
+        public static readonly int[] Expected123 = { 1, 2, 3 };
+        public static readonly int[] ExpectedEmptyArray = { };
+        #endregion
+
+        #region Parameters
+        public const string Parameters123 = "1,2,3";
+        public const string Parameters123abc = "1,2,3,abc";
+        #endregion
+
+        #region Test Titles
+        public const string TestTitle123 = "Series Test: Next in series of 1,2,3";
+        public const string TestTitle246 = "Series Test: Next in series of 2,4,6";
+        public const string TestTitleEmpty = "Series Test: Next in series of empty string";
+        public const string TestTitleParseParameters = "Series Test: Parse Parameters";
+        public const string TestTitleParseInvalidParameters = "Series Test: Parse Invalid Parameters";
+        #endregion
+
+        #region Fail Messages
+        public const string FailMessage123 = "CalculateNextInSeries_WhenInputIs123_Returns4 did not return the expected value";
+        public const string FailMessage246 = "CalculateNextInSeries_WhenInputIs246_Returns8 did not return the expected value";
+        public const string FailMessageEmpty = "CalculateNextInSeries_WhenInputIsEmpty_Returns0 did not return the expected value";
+        public const string FailMessageParseParameters = "ParseParameters_WhenInputIsValid_ReturnsCorrectArray did not return the expected value";
+        public const string FailMessageParseInvalidParameters = "ParseParameters_WhenInputIsInvalid_ReturnsEmptyArray did not return the expected value";
+        #endregion
+    }
 }
