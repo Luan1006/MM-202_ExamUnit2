@@ -1,4 +1,5 @@
 using TaskRepository;
+using static Tests.PrimeNumbersTestsConstants;
 
 namespace Tests
 {
@@ -15,53 +16,53 @@ namespace Tests
         private void ParseParameters_WithValidParameters_ReturnsNumberSequence()
         {
             // Arrange
-            string parameters = "2,3,4,5,6,7,8,9,10";
-            string expected = "2,3,4,5,6,7,8,9,10";
+            string parameters = ValidParameters;
+            string expected = ExpectedValidParameters;
 
             // Act
-            string actual = string.Join(",", PrimeNumbers.ParseParameters(parameters));
+            string actual = string.Join(Comma, PrimeNumbers.ParseParameters(parameters));
 
             // Assert
-            TaskTests.AreEqual(expected, actual, "PrimeNumbers Test: Parse Valid Parameters", "Did not return the expected number sequence");
+            TaskTests.AreEqual(expected, actual, ParseValidParametersTestTitle, ParseValidParametersFailMessage);
         }
 
         private void ParseParameters_WithInvalidParameters_ReturnsEmptyList()
         {
             // Arrange
-            string parameters = "2,3,4,abc,6,7,8,9,10";
-            string expected = "";
+            string parameters = InvalidParameters;
+            string expected = ExpectedInvalidParameters;
 
             // Act
-            string actual = string.Join(",", PrimeNumbers.ParseParameters(parameters));
+            string actual = string.Join(Comma, PrimeNumbers.ParseParameters(parameters));
 
             // Assert
-            TaskTests.AreEqual(expected, actual, "PrimeNumbers Test: Parse Invalid Parameters", "Did not return an empty list");
+            TaskTests.AreEqual(expected, actual, ParseInvalidParametersTestTitle, ParseInvalidParametersFailMessage);
         }
 
         private void GetPrimeNumbers_WithValidSequence_ReturnsPrimeNumbers()
         {
             // Arrange
-            int[] sequence = { 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            string expected = "2,3,5,7";
+            int[] sequence = ValidSequence;
+            string expected = ExpectedValidSequencePrimes;
 
             // Act
-            string actual = string.Join(",", PrimeNumbers.GetPrimeNumbers(sequence));
+            string actual = string.Join(Comma, PrimeNumbers.GetPrimeNumbers(sequence));
 
             // Assert
-            TaskTests.AreEqual(expected, actual, "PrimeNumbers Test: Get Primes from Valid Sequence", "Did not return the expected prime numbers");
+            TaskTests.AreEqual(expected, actual, GetPrimesFromValidSequenceTestTitle, GetPrimesFromValidSequenceFailMessage);
         }
 
         private void GetPrimeNumbers_WithInvalidSequence_ReturnsEmptyList()
         {
             // Arrange
-            int[] sequence = { 1, 4, 6, 8, 9, 10 };
-            string expected = "";
+            int[] sequence = InvalidSequence;
+            string expected = ExpectedInvalidSequencePrimes;
 
             // Act
-            string actual = string.Join(",", PrimeNumbers.GetPrimeNumbers(sequence));
+            string actual = string.Join(Comma, PrimeNumbers.GetPrimeNumbers(sequence));
 
             // Assert
-            TaskTests.AreEqual(expected, actual, "PrimeNumbers Test: Get Primes from Invalid Sequence", "Did not return an empty list");
+            TaskTests.AreEqual(expected, actual, GetPrimesFromInvalidSequenceTestTitle, GetPrimesFromInvalidSequenceFailMessage);
         }
     }
 

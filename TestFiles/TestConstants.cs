@@ -48,4 +48,36 @@ namespace Tests
         public const string FahrenheitTestConversionOfEmptyFDidNotReturnExpectedValue = "FahrenheitToCelsius_WhenInputIsEmpty_ReturnsErrorMessage did not return the expected value";
         #endregion
     }
+
+    public class PrimeNumbersTestsConstants
+    {
+        public const string Comma = ",";
+        #region Parameters
+        public const string ValidParameters = "2,3,4,5,6,7,8,9,10";
+        public static readonly int[] ValidSequence = { 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        public const string InvalidParameters = "2,3,4,abc,6,7,8,9,10";
+        public static readonly int[] InvalidSequence = { 1, 4, 6, 8, 9, 10 };
+        #endregion
+
+        #region Expected Results
+        public const string ExpectedValidParameters = "2,3,4,5,6,7,8,9,10";
+        public const string ExpectedInvalidParameters = "";
+        public const string ExpectedValidSequencePrimes = "2,3,5,7";
+        public const string ExpectedInvalidSequencePrimes = "";
+        #endregion
+
+        #region Test Titles
+        public const string ParseValidParametersTestTitle = "PrimeNumbers Test: Parse Valid Parameters";
+        public const string ParseInvalidParametersTestTitle = "PrimeNumbers Test: Parse Invalid Parameters";
+        public const string GetPrimesFromValidSequenceTestTitle = "PrimeNumbers Test: Get Primes from Valid Sequence";
+        public const string GetPrimesFromInvalidSequenceTestTitle = "PrimeNumbers Test: Get Primes from Invalid Sequence";
+        #endregion
+
+        #region Fail Messages
+        public const string ParseValidParametersFailMessage = "Did not return the expected number sequence";
+        public const string ParseInvalidParametersFailMessage = "Did not return an empty list";
+        public const string GetPrimesFromValidSequenceFailMessage = "Did not return the expected prime numbers";
+        public const string GetPrimesFromInvalidSequenceFailMessage = "Did not return an empty list";
+        #endregion
+    }
 }
