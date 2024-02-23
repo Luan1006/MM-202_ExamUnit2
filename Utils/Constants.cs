@@ -25,7 +25,7 @@ public class Constants
         public const string Got = "Got: ";
         public const string Expected = "Expected: ";
         public const string TaskFailed = "Task failed";
-        public const string Divider = "---------------------------------";
+        public const string Divider = "------------------------------------------------------------------";
         public const string Parameter = "Parameter:";
         public const string Answer = "Answer:";
         public const string TaskOne = "Task 1:";

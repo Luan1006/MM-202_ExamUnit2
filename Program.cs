@@ -13,7 +13,7 @@ class Program
             TaskTests.Main();
         }
 
-        Console.WriteLine(Constants.Text.StartingAssignment);
+        Print.PrintCentered(Constants.Text.StartingAssignment);
 
         // Registration
         Task registrationTask = GetTaskFromResponse();
