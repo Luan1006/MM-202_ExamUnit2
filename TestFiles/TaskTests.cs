@@ -73,6 +73,7 @@ namespace Tests
             // Assert
             TaskTests.AreEqual(expected.ToString(), actual.ToString(), "Fahrenheit Culture", "Fahrenheit does not use InvariantCulture");
         }
+
         public void FahrenheitToCelsius_WhenInputIs32_Returns0()
         {
             // Arrange
@@ -83,5 +84,10 @@ namespace Tests
 
             TaskTests.AreEqual(expected, actual, "Fahrenheit Input and Return", "FahrenheitToCelsius did not return the expected value");
         }
+    }
+
+    public class PrimeNumbersTests
+    {
+        
     }
 }
