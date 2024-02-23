@@ -80,4 +80,57 @@ namespace Tests
         public const string GetPrimesFromInvalidSequenceFailMessage = "Did not return an empty list";
         #endregion
     }
+
+    public class RomanTestConstants
+    {
+        #region Roman Numerals
+        public const string RomanI = "I";
+        public const string RomanV = "V";
+        public const string RomanX = "X";
+        public const string RomanL = "L";
+        public const string RomanC = "C";
+        public const string RomanIV = "IV";
+        public const string RomanIX = "IX";
+        public const string RomanEmpty = "";
+        public const string RomanInvalid = "Z";
+        #endregion
+
+        #region Expected Results
+        public const string ExpectedI = "1";
+        public const string ExpectedV = "5";
+        public const string ExpectedX = "10";
+        public const string ExpectedL = "50";
+        public const string ExpectedC = "100";
+        public const string ExpectedIV = "4";
+        public const string ExpectedIX = "9";
+        public const string ExpectedEmpty = "0";
+        public const string ExpectedInvalid = "0";
+        #endregion
+
+        #region Test Titles
+        public const string TestTitleI = "Roman Test: Conversion of I";
+        public const string TestTitleV = "Roman Test: Conversion of V";
+        public const string TestTitleX = "Roman Test: Conversion of X";
+        public const string TestTitleL = "Roman Test: Conversion of L";
+        public const string TestTitleC = "Roman Test: Conversion of C";
+        public const string TestTitleIV = "Roman Test: Conversion of IV";
+        public const string TestTitleIX = "Roman Test: Conversion of IX";
+        public const string TestTitleEmpty = "Roman Test: Conversion of Empty String";
+        public const string TestTitleInvalid = "Roman Test: Invalid Roman Numeral";
+        #endregion
+
+        #region Fail Messages
+        public const string FailMessageI = "RomanToInteger_WhenInputIsI_Returns1 did not return the expected value";
+        public const string FailMessageV = "RomanToInteger_WhenInputIsV_Returns5 did not return the expected value";
+        public const string FailMessageX = "RomanToInteger_WhenInputIsX_Returns10 did not return the expected value";
+        public const string FailMessageL = "RomanToInteger_WhenInputIsL_Returns50 did not return the expected value";
+        public const string FailMessageC = "RomanToInteger_WhenInputIsC_Returns100 did not return the expected value";
+        public const string FailMessageIV = "RomanToInteger_WhenInputIsIV_Returns4 did not return the expected value";
+        public const string FailMessageIX = "RomanToInteger_WhenInputIsIX_Returns9 did not return the expected value";
+        public const string FailMessageEmpty = "RomanToInteger_WhenInputIsEmpty_Returns0 did not return the expected value";
+        public const string FailMessageInvalid = "RomanToInteger_WhenInputIsInvalid_ReturnsMinusOne did not return the expected value";
+        #endregion
+    }
+
+    
 }

@@ -1,4 +1,5 @@
 using TaskRepository;
+using static Tests.RomanTestConstants;
 
 namespace Tests
 {
@@ -20,100 +21,100 @@ namespace Tests
         private void RomanToInteger_WhenInputIsI_Returns1()
         {
             // Arrange
-            string roman = "I";
-            string expected = "1";
+            string roman = RomanI;
+            string expected = ExpectedI;
             // Act
             string actual = Roman.RomanToInteger(roman).ToString();
 
-            TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of I", "RomanToInteger_WhenInputIsI_Returns1 did not return the expected value");
+            TaskTests.AreEqual(expected, actual, TestTitleI, FailMessageI);
         }
 
         private void RomanToInteger_WhenInputIsV_Returns5()
         {
             // Arrange
-            string roman = "V";
-            string expected = "5";
+            string roman = RomanV;
+            string expected = ExpectedV;
             // Act
             string actual = Roman.RomanToInteger(roman).ToString();
 
-            TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of V", "RomanToInteger_WhenInputIsV_Returns5 did not return the expected value");
+            TaskTests.AreEqual(expected, actual, TestTitleV, FailMessageV);
         }
 
         private void RomanToInteger_WhenInputIsX_Returns10()
         {
             // Arrange
-            string roman = "X";
-            string expected = "10";
+            string roman = RomanX;
+            string expected = ExpectedX;
             // Act
             string actual = Roman.RomanToInteger(roman).ToString();
 
-            TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of X", "RomanToInteger_WhenInputIsX_Returns10 did not return the expected value");
+            TaskTests.AreEqual(expected, actual, TestTitleX, FailMessageX);
         }
 
         private void RomanToInteger_WhenInputIsL_Returns50()
         {
             // Arrange
-            string roman = "L";
-            string expected = "50";
+            string roman = RomanL;
+            string expected = ExpectedL;
             // Act
             string actual = Roman.RomanToInteger(roman).ToString();
 
-            TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of L", "RomanToInteger_WhenInputIsL_Returns50 did not return the expected value");
+            TaskTests.AreEqual(expected, actual, TestTitleL, FailMessageL);
         }
 
         private void RomanToInteger_WhenInputIsC_Returns100()
         {
             // Arrange
-            string roman = "C";
-            string expected = "100";
+            string roman = RomanC;
+            string expected = ExpectedC;
             // Act
             string actual = Roman.RomanToInteger(roman).ToString();
 
-            TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of C", "RomanToInteger_WhenInputIsC_Returns100 did not return the expected value");
+            TaskTests.AreEqual(expected, actual, TestTitleC, FailMessageC);
         }
 
         private void RomanToInteger_WhenInputIsIV_Returns4()
         {
             // Arrange
-            string roman = "IV";
-            string expected = "4";
+            string roman = RomanIV;
+            string expected = ExpectedIV;
             // Act
             string actual = Roman.RomanToInteger(roman).ToString();
 
-            TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of IV", "RomanToInteger_WhenInputIsIV_Returns4 did not return the expected value");
+            TaskTests.AreEqual(expected, actual, TestTitleIV, FailMessageIV);
         }
 
         private void RomanToInteger_WhenInputIsIX_Returns9()
         {
             // Arrange
-            string roman = "IX";
-            string expected = "9";
+            string roman = RomanIX;
+            string expected = ExpectedIX;
             // Act
             string actual = Roman.RomanToInteger(roman).ToString();
 
-            TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of IX", "RomanToInteger_WhenInputIsIX_Returns9 did not return the expected value");
+            TaskTests.AreEqual(expected, actual, TestTitleIX, FailMessageIX);
         }
 
         private void RomanToInteger_WhenInputIsEmpty_Returns0()
         {
             // Arrange
-            string roman = "";
-            string expected = "0";
+            string roman = RomanEmpty;
+            string expected = ExpectedEmpty;
             // Act
             string actual = Roman.RomanToInteger(roman).ToString();
 
-            TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of Empty String", "RomanToInteger_WhenInputIsEmpty_Returns0 did not return the expected value");
+            TaskTests.AreEqual(expected, actual, TestTitleEmpty, FailMessageEmpty);
         }
 
         private void RomanToInteger_WhenInputIsInvalid_Returns0()
         {
             // Arrange
-            string roman = "Z";
-            string expected = "0";
+            string roman = RomanInvalid;
+            string expected = ExpectedInvalid;
             // Act
             string actual = Roman.RomanToInteger(roman).ToString();
 
-            TaskTests.AreEqual(expected, actual, "Roman Test: Invalid Roman Numeral", "RomanToInteger_WhenInputIsInvalid_ReturnsMinusOne did not return the expected value");
+            TaskTests.AreEqual(expected, actual, TestTitleInvalid, FailMessageInvalid);
         }
     }
 }
