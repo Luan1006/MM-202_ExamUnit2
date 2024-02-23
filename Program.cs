@@ -19,15 +19,15 @@ class Program
         Task registrationTask = GetTaskFromResponse();
 
         // First task
-        string getSecondTaskResponseContent = ProcessTask(Fahrenheit.Run, registrationTask.taskID);
+        string fahrenheitTaskResponse = ProcessTask(Fahrenheit.Run, registrationTask.taskID);
 
         // Second task
-        string getThirdTaskResponseContent = ProcessTask(PrimeNumbers.Run, new Task(getSecondTaskResponseContent).taskID);
+        string primeNumbersTaskResponse = ProcessTask(PrimeNumbers.Run, new Task(fahrenheitTaskResponse).taskID);
 
         // Third task
-        string getFourthTaskResponseContent = ProcessTask(Roman.Run, new Task(getThirdTaskResponseContent).taskID);
+        string romanTaskResponse = ProcessTask(Roman.Run, new Task(primeNumbersTaskResponse).taskID);
 
         // Fourth task
-        string getFifthTaskResponseContent = ProcessTask(Series.Run, new Task(getFourthTaskResponseContent).taskID);
+        string seriesTaskResponse = ProcessTask(Series.Run, new Task(romanTaskResponse).taskID);
     }
 }
