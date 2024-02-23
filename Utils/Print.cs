@@ -9,10 +9,18 @@ public class Print
         Console.WriteLine($"{Colors.Green}{Text.Correct}{ANSICodes.Reset}");
     }
 
-    public static void PrintColoredMessage(string message, string color)
+    public static void PrintColoredMessage(string message, string color, bool newLine = true)
     {
-        Console.WriteLine($"{color}{message}{ANSICodes.Reset}");
+        if (newLine)
+        {
+            Console.WriteLine($"{color}{message}{ANSICodes.Reset}");
+        }
+        else
+        {
+            Console.Write($"{color}{message}{ANSICodes.Reset}");
+        }
     }
+
     public static void PrintGotMessage(string got)
     {
         Console.WriteLine($"{Text.Got}{Colors.Red}{got}{ANSICodes.Reset}");
@@ -58,6 +66,17 @@ public class Print
     private static void PrintTaskAnswer(string answer)
     {
         Console.WriteLine($"{Colors.Green}{Text.Answer} {answer}{ANSICodes.Reset}\n");
+    }
+
+    private static void PrintTime(long time)
+    {
+        Console.WriteLine($"{Text.In} {time}{Text.Ms}{ANSICodes.Reset}");
+    }
+
+    public static void PrintTestResult(string testName, string testStatus, long elapsedMilliseconds, string color)
+    {
+        Print.PrintColoredMessage($"{testName} {testStatus}", color, false);
+        Print.PrintTime(elapsedMilliseconds);
     }
 
     public static void PrintTaskDetails(String currentTask, Task task, String answer)

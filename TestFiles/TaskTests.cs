@@ -1,5 +1,7 @@
 using System.Diagnostics;
+using Colors = AnsiTools.ANSICodes.Colors;
 using static TaskRepository;
+using static Constants;
 
 namespace Tests
 {
@@ -12,13 +14,14 @@ namespace Tests
         public static void Main()
         {
             FahrenheitTests fahrenheitTests = new FahrenheitTests();
-            fahrenheitTests.FahrenheitToCelsius_WhenInputIs32_Returns0();
+            fahrenheitTests.Run();
+
             Console.WriteLine($"Tests passed: {passed}");
             Console.WriteLine($"Tests failed: {failed}");
-            Console.WriteLine($"Total time: {time}ms");
+            Console.WriteLine($"Total time: {time} ms\n");
         }
 
-        public static bool AreEqual(string expected, string actual, string testName, string message)
+        public static void AreEqual(string expected, string actual, string testName, string message)
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -26,21 +29,27 @@ namespace Tests
             {
                 Console.WriteLine($"{testName} - {message}");
                 stopWatch.Stop();
-                Console.WriteLine($"{testName} failed in {stopWatch.ElapsedMilliseconds}ms");
+                Print.PrintTestResult(testName, Text.Failed, stopWatch.ElapsedMilliseconds, Colors.Red);
                 failed++;
                 time += stopWatch.ElapsedMilliseconds;
-                return false;
+                return;
             }
 
             stopWatch.Stop();
-            Console.WriteLine($"{testName} passed in {stopWatch.ElapsedMilliseconds}ms");
+            Print.PrintTestResult(testName, Text.Passed, stopWatch.ElapsedMilliseconds, Colors.Green);
             passed++;
-            return true;
+            return;
         }
 
     }
     public class FahrenheitTests
     {
+        public void Run()
+        {
+            FahrenheitUsesCorrectParameter();
+            FahrenheitToCelsius_WhenInputIs32_Returns0();
+        }
+
         public void FahrenheitUsesCorrectParameter()
         {
             // Arrange
@@ -50,7 +59,7 @@ namespace Tests
             // Act
             var actual = task.parameters;
 
-            TaskTests.AreEqual(expected, actual, "Fahrenheit","FahrenheitUsesCorrectParameter did not return the expected value");
+            TaskTests.AreEqual(expected, actual, "Fahrenheit Correct Parameter", "FahrenheitUsesCorrectParameter did not return the expected value");
         }
         public void FahrenheitToCelsius_WhenInputIs32_Returns0()
         {
@@ -60,7 +69,7 @@ namespace Tests
             // Act
             var actual = Fahrenheit.FahrenheitToCelsius(fahrenheit);
 
-            TaskTests.AreEqual(expected, actual, "Fahrenheit","FahrenheitToCelsius did not return the expected value");
+            TaskTests.AreEqual(expected, actual, "Fahrenheit Input and Return", "FahrenheitToCelsius did not return the expected value");
         }
     }
 }

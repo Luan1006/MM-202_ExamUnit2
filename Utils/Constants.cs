@@ -33,8 +33,12 @@ public class Constants
         public const string TaskThree = "Task 3:";
         public const string TaskFour = "Task 4:";
         public const string TwoDecimal = "F2";
-        public const char CharComma = ',';
+        public const string In = "in";
+        public const string Ms = "ms";
+        public const string Passed = "passed";
+        public const string Failed = "failed";
         public const string StringComma = ",";
+        public const char CharComma = ',';
         public const char CharRomanOne = 'I';
         public const char CharRomanFive = 'V';
         public const char CharRomanTen = 'X';

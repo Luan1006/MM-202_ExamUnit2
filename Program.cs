@@ -1,7 +1,14 @@
 ﻿using static TaskRepository;
 using static TaskProcessor;
+using Tests;
 
 Console.Clear();
+
+if (args.Length > 0 && args[0] == "-t")
+{
+    TaskTests.Main();
+}
+
 Console.WriteLine(Constants.Text.StartingAssignment);
 
 // Regsitration
