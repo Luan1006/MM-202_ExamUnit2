@@ -24,9 +24,9 @@ namespace Tests
             SeriesTests seriesTests = new SeriesTests();
             seriesTests.Run();
 
-            Console.WriteLine($"Tests passed: {passed}");
-            Console.WriteLine($"Tests failed: {failed}");
-            Console.WriteLine($"Total time: {time} ms\n");
+            Console.WriteLine($"{Constants.TestsPassed} {passed}");
+            Console.WriteLine($"{Constants.TestsFailed} {failed}");
+            Console.WriteLine($"{Constants.TotalTime}", time);
         }
 
         public static void AreEqual(string expected, string actual, string testName, string message)
