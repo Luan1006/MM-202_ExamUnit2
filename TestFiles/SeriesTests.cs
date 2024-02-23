@@ -19,7 +19,7 @@ namespace Tests
             int[] series = { 1, 2, 3 };
             string expected = "4";
             // Act
-            var actual = Series.CalculateNextInSeries(series).ToString();
+            string actual = Series.CalculateNextInSeries(series).ToString();
 
             TaskTests.AreEqual(expected, actual, "Series Test: Next in series of 1,2,3", "CalculateNextInSeries_WhenInputIs123_Returns4 did not return the expected value");
         }
@@ -30,7 +30,7 @@ namespace Tests
             int[] series = { 2, 4, 6 };
             string expected = "8";
             // Act
-            var actual = Series.CalculateNextInSeries(series).ToString();
+            string actual = Series.CalculateNextInSeries(series).ToString();
 
             TaskTests.AreEqual(expected, actual, "Series Test: Next in series of 2,4,6", "CalculateNextInSeries_WhenInputIs246_Returns8 did not return the expected value");
         }
@@ -41,7 +41,7 @@ namespace Tests
             int[] series = { };
             string expected = "0";
             // Act
-            var actual = Series.CalculateNextInSeries(series).ToString();
+            string actual = Series.CalculateNextInSeries(series).ToString();
 
             TaskTests.AreEqual(expected, actual, "Series Test: Next in series of empty string", "CalculateNextInSeries_WhenInputIsEmpty_Returns0 did not return the expected value");
         }
@@ -51,7 +51,7 @@ namespace Tests
             string parameters = "1,2,3";
             int[] expected = { 1, 2, 3 };
             // Act
-            var actual = Series.ParseParameters(parameters);
+            int[] actual = Series.ParseParameters(parameters);
 
             // Assert
             TaskTests.AreEqual(expected, actual, "Series Test: Parse Parameters", "ParseParameters_WhenInputIsValid_ReturnsCorrectArray did not return the expected value");
@@ -63,7 +63,7 @@ namespace Tests
             string parameters = "1,2,3,abc";
             int[] expected = { };
             // Act
-            var actual = Series.ParseParameters(parameters);
+            int[] actual = Series.ParseParameters(parameters);
 
             // Assert
             TaskTests.AreEqual(expected, actual, "Series Test: Parse Invalid Parameters", "ParseParameters_WhenInputIsInvalid_ReturnsEmptyArray did not return the expected value");

@@ -1,3 +1,4 @@
+using System.Globalization;
 using static TaskRepository;
 
 namespace Tests
@@ -22,7 +23,7 @@ namespace Tests
             Task task = new Task(jsonContent);
             string expected = "32";
             // Act
-            var actual = task.parameters;
+            string actual = task.parameters;
 
             TaskTests.AreEqual(expected, actual, "Fahrenheit Test: Correct Parameter", "UsesCorrectParameter_ReturnsExpectedParameter did not return the expected value");
         }
@@ -30,10 +31,10 @@ namespace Tests
         private void GetCultureInfo_ReturnsInvariantCulture()
         {
             // Arrange
-            System.Globalization.CultureInfo expected = System.Globalization.CultureInfo.InvariantCulture;
+            CultureInfo expected = CultureInfo.InvariantCulture;
 
             // Act
-            var actual = Fahrenheit.GetCultureInfo();
+            CultureInfo actual = Fahrenheit.GetCultureInfo();
 
             // Assert
             TaskTests.AreEqual(expected.ToString(), actual.ToString(), "Fahrenheit Test: Invariant Culture", "GetCultureInfo_ReturnsInvariantCulture does not use InvariantCulture");
@@ -45,7 +46,7 @@ namespace Tests
             string fahrenheit = "32";
             string expected = "0.00";
             // Act
-            var actual = Fahrenheit.FahrenheitToCelsius(fahrenheit);
+            string actual = Fahrenheit.FahrenheitToCelsius(fahrenheit);
 
             TaskTests.AreEqual(expected, actual, "Fahrenheit Test: Conversion of 32F", "FahrenheitToCelsius_WhenInputIs32_Returns0 did not return the expected value");
         }
@@ -67,7 +68,7 @@ namespace Tests
             string fahrenheit = "0";
             string expected = "-17.78";
             // Act
-            var actual = Fahrenheit.FahrenheitToCelsius(fahrenheit);
+            string actual = Fahrenheit.FahrenheitToCelsius(fahrenheit);
 
             TaskTests.AreEqual(expected, actual, "Fahrenheit Test: Conversion of 0F", "FahrenheitToCelsius_WhenInputIsZero_ReturnsExpectedResult did not return the expected value");
         }
@@ -91,7 +92,7 @@ namespace Tests
             string expected = "Input must be a valid number.";
 
             // Act
-            var actual = Fahrenheit.FahrenheitToCelsius(fahrenheit);
+            string actual = Fahrenheit.FahrenheitToCelsius(fahrenheit);
 
             TaskTests.AreEqual(expected, actual, "Fahrenheit Test: Empty Input", "FahrenheitToCelsius_WhenInputIsEmpty_ReturnsErrorMessage did not return the expected error message");
         }
