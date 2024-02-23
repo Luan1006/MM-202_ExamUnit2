@@ -15,7 +15,7 @@ public class TaskRepository
             return celsius;
         }
 
-        private static string FahrenheitToCelsius(string fahrenheit)
+        public static string FahrenheitToCelsius(string fahrenheit)
         {
             float fahrenheitFloat = float.Parse(fahrenheit);
             float celsius = (fahrenheitFloat - 32) * 5 / 9;
