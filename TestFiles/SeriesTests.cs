@@ -1,4 +1,4 @@
-using static TaskRepository;
+using TaskRepository;
 
 namespace Tests
 {

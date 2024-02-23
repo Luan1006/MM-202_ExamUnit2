@@ -1,5 +1,5 @@
 using System.Globalization;
-using static TaskRepository;
+using TaskRepository;
 
 namespace Tests
 {
