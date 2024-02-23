@@ -51,28 +51,7 @@ public class Print
 
         int windowWidth = Console.WindowWidth;
 
-        string[] words = message.Split(' ');
-
-        List<string> lines = new List<string>();
-        string line = "";
-
-        foreach (string word in words)
-        {
-            if ((line + word).Length < windowWidth)
-            {
-                line += word + " ";
-            }
-            else
-            {
-                lines.Add(line);
-                line = word + " ";
-            }
-        }
-
-        if (line.Length > 0)
-        {
-            lines.Add(line);
-        }
+        List<string> lines = SplitIntoLines(message, windowWidth);
 
         foreach (var l in lines)
         {
@@ -89,6 +68,34 @@ public class Print
                 Console.Write(paddedMessage);
             }
         }
+    }
+
+    private static List<string> SplitIntoLines(string message, int maxLineLength)
+    {
+        string[] words = message.Split(' ');
+
+        List<string> lines = new List<string>();
+        string line = "";
+
+        foreach (string word in words)
+        {
+            if ((line + word).Length < maxLineLength)
+            {
+                line += word + " ";
+            }
+            else
+            {
+                lines.Add(line);
+                line = word + " ";
+            }
+        }
+
+        if (line.Length > 0)
+        {
+            lines.Add(line);
+        }
+
+        return lines;
     }
 
     private static void PrintCurrentTask(string currentTask)
