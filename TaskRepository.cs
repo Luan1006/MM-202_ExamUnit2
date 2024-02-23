@@ -158,13 +158,28 @@ public class TaskRepository
             return answer.ToString();
         }
 
-        private static int[] ParseParameters(string parameters)
+        public static int[] ParseParameters(string parameters)
         {
-            return parameters.Split(Text.CharComma).Select(int.Parse).ToArray();
+            int[] series;
+            try
+            {
+                series = parameters.Split(Text.CharComma).Select(int.Parse).ToArray();
+            }
+            catch (FormatException)
+            {
+                series = [];
+            }
+
+            return series;
         }
 
-        private static int CalculateNextInSeries(int[] series)
+        public static int CalculateNextInSeries(int[] series)
         {
+            if (series.Length < 2)
+            {
+                return 0;
+            }
+
             int lastInSeries = series[series.Length - 1];
             int secondLastInSeries = series[series.Length - 2];
 
