@@ -61,7 +61,7 @@ namespace Tests
             FahrenheitToCelsius_WhenInputIsEmpty_ReturnsErrorMessage();
         }
 
-        public void UsesCorrectParameter_ReturnsExpectedParameter()
+        private void UsesCorrectParameter_ReturnsExpectedParameter()
         {
             // Arrange
             string jsonContent = "{\"title\":\"Fahrenheit to Celsius\",\"description\":\"Converts a temperature in Fahrenheit to Celsius\",\"taskID\":\"1\",\"usierID\":\"1\",\"parameters\":\"32\",\"Message\":\"\",\"got\":\"\",\"expected\":\"0.00\"}";
@@ -73,7 +73,7 @@ namespace Tests
             TaskTests.AreEqual(expected, actual, "Fahrenheit Test: Correct Parameter", "UsesCorrectParameter_ReturnsExpectedParameter did not return the expected value");
         }
 
-        public void GetCultureInfo_ReturnsInvariantCulture()
+        private void GetCultureInfo_ReturnsInvariantCulture()
         {
             // Arrange
             System.Globalization.CultureInfo expected = System.Globalization.CultureInfo.InvariantCulture;
@@ -85,7 +85,7 @@ namespace Tests
             TaskTests.AreEqual(expected.ToString(), actual.ToString(), "Fahrenheit Test: Invariant Culture", "GetCultureInfo_ReturnsInvariantCulture does not use InvariantCulture");
         }
 
-        public void FahrenheitToCelsius_WhenInputIs32_Returns0()
+        private void FahrenheitToCelsius_WhenInputIs32_Returns0()
         {
             // Arrange
             string fahrenheit = "32";
@@ -96,7 +96,7 @@ namespace Tests
             TaskTests.AreEqual(expected, actual, "Fahrenheit Test: Conversion of 32F", "FahrenheitToCelsius_WhenInputIs32_Returns0 did not return the expected value");
         }
 
-        public void FahrenheitToCelsius_WhenInputIsNegative_ReturnsExpectedResult()
+        private void FahrenheitToCelsius_WhenInputIsNegative_ReturnsExpectedResult()
         {
             // Arrange
             string fahrenheit = "-40";
@@ -107,7 +107,7 @@ namespace Tests
             TaskTests.AreEqual(expected, actual, "Fahrenheit Test: Conversion of Negative Value", "FahrenheitToCelsius_WhenInputIsNegative_ReturnsExpectedResult did not return the expected value");
         }
 
-        public void FahrenheitToCelsius_WhenInputIsZero_ReturnsExpectedResult()
+        private void FahrenheitToCelsius_WhenInputIsZero_ReturnsExpectedResult()
         {
             // Arrange
             string fahrenheit = "0";
@@ -118,7 +118,7 @@ namespace Tests
             TaskTests.AreEqual(expected, actual, "Fahrenheit Test: Conversion of 0F", "FahrenheitToCelsius_WhenInputIsZero_ReturnsExpectedResult did not return the expected value");
         }
 
-        public void FahrenheitToCelsius_WhenInputIsNonNumeric_ReturnsErrorMessage()
+        private void FahrenheitToCelsius_WhenInputIsNonNumeric_ReturnsErrorMessage()
         {
             // Arrange
             string fahrenheit = "abc";
@@ -130,7 +130,7 @@ namespace Tests
             TaskTests.AreEqual(expected, actual, "Fahrenheit Test: Non-Numeric Input", "FahrenheitToCelsius_WhenInputIsNonNumeric_ReturnsErrorMessage did not return the expected error message");
         }
 
-        public void FahrenheitToCelsius_WhenInputIsEmpty_ReturnsErrorMessage()
+        private void FahrenheitToCelsius_WhenInputIsEmpty_ReturnsErrorMessage()
         {
             // Arrange
             string fahrenheit = "";
@@ -221,7 +221,7 @@ namespace Tests
             RomanToInteger_WhenInputIsInvalid_Returns0();
         }
 
-        public void RomanToInteger_WhenInputIsI_Returns1()
+        private void RomanToInteger_WhenInputIsI_Returns1()
         {
             // Arrange
             string roman = "I";
@@ -232,7 +232,7 @@ namespace Tests
             TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of I", "RomanToInteger_WhenInputIsI_Returns1 did not return the expected value");
         }
 
-        public void RomanToInteger_WhenInputIsV_Returns5()
+        private void RomanToInteger_WhenInputIsV_Returns5()
         {
             // Arrange
             string roman = "V";
@@ -243,7 +243,7 @@ namespace Tests
             TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of V", "RomanToInteger_WhenInputIsV_Returns5 did not return the expected value");
         }
 
-        public void RomanToInteger_WhenInputIsX_Returns10()
+        private void RomanToInteger_WhenInputIsX_Returns10()
         {
             // Arrange
             string roman = "X";
@@ -254,7 +254,7 @@ namespace Tests
             TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of X", "RomanToInteger_WhenInputIsX_Returns10 did not return the expected value");
         }
 
-        public void RomanToInteger_WhenInputIsL_Returns50()
+        private void RomanToInteger_WhenInputIsL_Returns50()
         {
             // Arrange
             string roman = "L";
@@ -265,7 +265,7 @@ namespace Tests
             TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of L", "RomanToInteger_WhenInputIsL_Returns50 did not return the expected value");
         }
 
-        public void RomanToInteger_WhenInputIsC_Returns100()
+        private void RomanToInteger_WhenInputIsC_Returns100()
         {
             // Arrange
             string roman = "C";
@@ -276,7 +276,7 @@ namespace Tests
             TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of C", "RomanToInteger_WhenInputIsC_Returns100 did not return the expected value");
         }
 
-        public void RomanToInteger_WhenInputIsIV_Returns4()
+        private void RomanToInteger_WhenInputIsIV_Returns4()
         {
             // Arrange
             string roman = "IV";
@@ -287,7 +287,7 @@ namespace Tests
             TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of IV", "RomanToInteger_WhenInputIsIV_Returns4 did not return the expected value");
         }
 
-        public void RomanToInteger_WhenInputIsIX_Returns9()
+        private void RomanToInteger_WhenInputIsIX_Returns9()
         {
             // Arrange
             string roman = "IX";
@@ -298,7 +298,7 @@ namespace Tests
             TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of IX", "RomanToInteger_WhenInputIsIX_Returns9 did not return the expected value");
         }
 
-        public void RomanToInteger_WhenInputIsEmpty_Returns0()
+        private void RomanToInteger_WhenInputIsEmpty_Returns0()
         {
             // Arrange
             string roman = "";
@@ -309,7 +309,7 @@ namespace Tests
             TaskTests.AreEqual(expected, actual, "Roman Test: Conversion of Empty String", "RomanToInteger_WhenInputIsEmpty_Returns0 did not return the expected value");
         }
 
-        public void RomanToInteger_WhenInputIsInvalid_Returns0()
+        private void RomanToInteger_WhenInputIsInvalid_Returns0()
         {
             // Arrange
             string roman = "Z";
@@ -319,7 +319,5 @@ namespace Tests
 
             TaskTests.AreEqual(expected, actual, "Roman Test: Invalid Roman Numeral", "RomanToInteger_WhenInputIsInvalid_ReturnsMinusOne did not return the expected value");
         }
-
-
     }
 }
