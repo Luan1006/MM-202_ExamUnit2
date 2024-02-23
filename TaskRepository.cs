@@ -22,6 +22,11 @@ public class TaskRepository
 
             return celsius.ToString(Text.TwoDecimal, culture);
         }
+
+        public static System.Globalization.CultureInfo GetCultureInfo()
+        {
+            return culture;
+        }
     }
 
     public class PrimeNumbers

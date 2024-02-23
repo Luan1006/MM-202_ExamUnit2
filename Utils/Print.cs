@@ -75,11 +75,11 @@ public class Print
 
     public static void PrintTestResult(string testName, string testStatus, long elapsedMilliseconds, string color)
     {
-        Print.PrintColoredMessage($"{testName} {testStatus}", color, false);
-        Print.PrintTime(elapsedMilliseconds);
+        PrintColoredMessage($"{testName} {testStatus} ", color, false);
+        PrintTime(elapsedMilliseconds);
     }
 
-    public static void PrintTaskDetails(String currentTask, Task task, String answer)
+    public static void PrintTaskDetails(String currentTask, Task task, string answer)
     {
         PrintCurrentTask(currentTask);
         PrintTaskTitle(task.title);

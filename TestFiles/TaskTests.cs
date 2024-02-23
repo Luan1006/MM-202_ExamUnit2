@@ -47,6 +47,7 @@ namespace Tests
         public void Run()
         {
             FahrenheitUsesCorrectParameter();
+            FahrenheitUsesInvariantCulture();
             FahrenheitToCelsius_WhenInputIs32_Returns0();
         }
 
@@ -60,6 +61,17 @@ namespace Tests
             var actual = task.parameters;
 
             TaskTests.AreEqual(expected, actual, "Fahrenheit Correct Parameter", "FahrenheitUsesCorrectParameter did not return the expected value");
+        }
+        public void FahrenheitUsesInvariantCulture()
+        {
+            // Arrange
+            System.Globalization.CultureInfo expected = System.Globalization.CultureInfo.InvariantCulture;
+
+            // Act
+            var actual = Fahrenheit.GetCultureInfo();
+
+            // Assert
+            TaskTests.AreEqual(expected.ToString(), actual.ToString(), "Fahrenheit Culture", "Fahrenheit does not use InvariantCulture");
         }
         public void FahrenheitToCelsius_WhenInputIs32_Returns0()
         {
