@@ -50,18 +50,44 @@ public class Print
         int ansiEscapeCodeLength = message.Length - Regex.Replace(message, @"\x1B\[[^@-~]*[@-~]", string.Empty).Length;
 
         int windowWidth = Console.WindowWidth;
-        // Subtract the length of the ANSI escape codes from the message length
-        int paddingSize = (windowWidth - message.Length + ansiEscapeCodeLength) / 2;
 
-        string paddedMessage = message.PadLeft(message.Length + paddingSize);
+        string[] words = message.Split(' ');
 
-        if (newLine)
+        List<string> lines = new List<string>();
+        string line = "";
+
+        foreach (string word in words)
         {
-            Console.WriteLine(paddedMessage);
+            if ((line + word).Length < windowWidth)
+            {
+                line += word + " ";
+            }
+            else
+            {
+                lines.Add(line);
+                line = word + " ";
+            }
         }
-        else
+
+        if (line.Length > 0)
         {
-            Console.Write(paddedMessage);
+            lines.Add(line);
+        }
+
+        foreach (var l in lines)
+        {
+            int paddingSize = (windowWidth - l.Length + ansiEscapeCodeLength) / 2;
+
+            string paddedMessage = l.PadLeft(l.Length + paddingSize);
+
+            if (newLine)
+            {
+                Console.WriteLine(paddedMessage);
+            }
+            else
+            {
+                Console.Write(paddedMessage);
+            }
         }
     }
 
